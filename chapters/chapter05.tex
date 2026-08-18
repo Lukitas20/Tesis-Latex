@@ -20,7 +20,7 @@ La distinción entre ambos roles se resuelve en el momento del registro y determ
 La tabla~\ref{tab:rf} detalla los requerimientos funcionales del sistema, agrupados según el actor que los ejercita. Se identifican con el prefijo RF y una numeración correlativa que se utiliza como referencia en el resto del documento.
 
 \setlength{\tabcolsep}{4pt}
-\begin{longtable}{>{\raggedright\arraybackslash}p{1.1cm} >{\raggedright\arraybackslash}p{7.4cm} >{\raggedright\arraybackslash}p{1.6cm} >{\raggedright\arraybackslash}p{2.9cm}}
+\begin{longtable}{|>{\raggedright\arraybackslash}p{1.1cm}|>{\raggedright\arraybackslash}p{7.4cm}|>{\raggedright\arraybackslash}p{1.6cm}|>{\raggedright\arraybackslash}p{2.9cm}|}
 	\caption{Requerimientos funcionales del sistema.}\label{tab:rf} \\
 	\hline
 	\textbf{ID} & \textbf{Descripción} & \textbf{Actor} & \textbf{Origen} \\
@@ -64,7 +64,7 @@ Los requerimientos RF-15, RF-16, RF-18 y RF-19 conforman el módulo orientado al
 
 La tabla~\ref{tab:rnf} detalla los requerimientos no funcionales, organizados según el atributo de calidad que expresan. A diferencia de los funcionales, estos no describen capacidades observables por el usuario sino restricciones que condicionan la manera en que dichas capacidades se implementan, y su cumplimiento se verifica de forma transversal.
 
-\begin{longtable}{>{\raggedright\arraybackslash}p{1.1cm} >{\raggedright\arraybackslash}p{2cm} >{\raggedright\arraybackslash}p{7cm} >{\raggedright\arraybackslash}p{2.6cm}}
+\begin{longtable}{|>{\raggedright\arraybackslash}p{1.1cm}|>{\raggedright\arraybackslash}p{2cm}|>{\raggedright\arraybackslash}p{7cm}|>{\raggedright\arraybackslash}p{2.6cm}|}
 	\caption{Requerimientos no funcionales del sistema.}\label{tab:rnf} \\
 	\hline
 	\textbf{ID} & \textbf{Atributo} & \textbf{Descripción} & \textbf{Origen} \\
@@ -96,20 +96,72 @@ Los requerimientos no funcionales definidos buscan garantizar que las funcionali
 
 Por otra parte, RNF-11 establece una restricción sobre la escalabilidad del módulo de recomendación. Debido a que el catálogo puede incorporar una cantidad creciente de videojuegos, la solución debe evitar estructuras cuyo consumo de memoria aumente de manera cuadrática respecto del número de títulos. De esta forma, el sistema podrá ampliar su catálogo sin que el costo computacional comprometa su rendimiento o viabilidad técnica.
 
+\section{Análisis FODA}\label{sec:foda}
+
+A partir del relevamiento competitivo y del análisis de las fuerzas del entorno, se elaboró una matriz FODA para identificar los factores internos y externos que condicionan el desarrollo de GameTrack. Las fortalezas y debilidades describen características propias del proyecto, mientras que las oportunidades y amenazas corresponden a condiciones del contexto. La figura~\ref{fig:foda} presenta una síntesis de los principales factores identificados.
+
+\begin{figure}[H]
+	\centering
+	\DiagramFig{diagrama-foda.png}
+	\caption{Análisis FODA de GameTrack.}
+	\label{fig:foda}
+\end{figure}
+
+Entre las principales fortalezas se encuentra la propuesta de valor dual de GameTrack. La plataforma combina recomendaciones personalizadas destinadas a los jugadores con herramientas de análisis de reseñas orientadas a los desarrolladores. Esta integración permite abordar dos necesidades relacionadas a partir de una misma base de información: ayudar al jugador a descubrir títulos adecuados y permitir que los estudios comprendan cómo son recibidos sus videojuegos.
+
+Otra fortaleza es la utilización de un sistema híbrido de recomendación. La combinación de filtrado basado en contenido, filtrado colaborativo y un mecanismo de respaldo basado en popularidad permite aprovechar distintas señales y reducir las limitaciones de cada enfoque por separado. A esto se suma la incorporación de datos reales procedentes de Steam y SteamSpy, como metadatos, etiquetas, reseñas, horas jugadas e indicadores de popularidad. La organización modular de la aplicación también facilita el mantenimiento y la evolución independiente de sus componentes, aunque el prototipo se ejecute como un único proceso.
+
+La principal debilidad surge del carácter académico del prototipo. GameTrack no cuenta con una base real y sostenida de usuarios, por lo que el volumen de interacciones internas resulta insuficiente para validar el filtrado colaborativo en condiciones semejantes a las de una plataforma productiva. Esta limitación también dificulta la evaluación completa del sistema de recomendación, ya que algunas métricas requieren historiales de uso, calificaciones y patrones de comportamiento que solamente pueden obtenerse mediante una adopción prolongada.
+
+El proyecto también se encuentra condicionado por el tiempo y los recursos disponibles para el equipo. Determinadas funcionalidades, como la integración social, el contenido audiovisual, el despliegue a gran escala y la evaluación con una población extensa, quedan fuera del alcance del prototipo. Estas restricciones no invalidan la solución, pero limitan el grado en que sus resultados pueden generalizarse a un entorno comercial.
+
+Las oportunidades se relacionan principalmente con la fragmentación de las soluciones existentes. Las plataformas analizadas ofrecen catálogos, reseñas, recomendaciones o información para desarrolladores, pero no reúnen de manera integrada una recomendación híbrida y explicable para el jugador con un análisis de opiniones orientado al estudio responsable del título. Esta ausencia permite diferenciar a GameTrack mediante la centralización de capacidades que actualmente requieren consultar múltiples servicios.
+
+La disponibilidad de APIs y fuentes públicas representa otra oportunidad, ya que facilita la construcción del catálogo y permite enriquecer los videojuegos con metadatos, etiquetas y reseñas reales. Asimismo, la arquitectura y el modelo de datos pueden extenderse en el futuro hacia otras tiendas, plataformas y fuentes de información, reduciendo progresivamente la dependencia de un único ecosistema.
+
+Entre las amenazas se destaca la capacidad de las plataformas consolidadas para incorporar funcionalidades semejantes. Servicios como Steam disponen de una base de usuarios, infraestructura y volumen de datos considerablemente superiores, lo que les permitiría desarrollar recomendaciones más avanzadas o incorporar herramientas adicionales de análisis. La ventaja de GameTrack depende, por lo tanto, de su especialización y de la integración de capacidades que no constituyen actualmente el foco principal de estas plataformas.
+
+También representan una amenaza los posibles cambios en las interfaces y condiciones de acceso de los proveedores externos. La limitación o eliminación de una API puede afectar la actualización del catálogo, la sincronización de bibliotecas y la incorporación de reseñas. A esto se suma la competencia indirecta de asistentes generales de inteligencia artificial, plataformas de análisis de mercado, redes sociales y creadores de contenido, que pueden satisfacer parcialmente la necesidad de descubrir o evaluar videojuegos.
+
+El análisis FODA muestra que GameTrack posee una propuesta diferencial y técnicamente viable, pero se encuentra condicionado por la falta de una base real de usuarios y por la dependencia de fuentes externas. En consecuencia, la estrategia del proyecto debe concentrarse en validar su propuesta de valor, preservar la información obtenida de terceros y demostrar la utilidad de integrar recomendaciones explicables y análisis de reseñas dentro de una misma solución.
+
+\section{Cinco Fuerzas de Porter}\label{sec:porter}
+
+Luego de analizar las plataformas existentes y las capacidades que ofrecen, se aplicó el modelo de las Cinco Fuerzas de Porter con el propósito de estudiar las condiciones competitivas del entorno en el que se inserta GameTrack. El análisis considera como industria de referencia a las plataformas digitales orientadas al descubrimiento de videojuegos, la recomendación personalizada y el análisis de reseñas. La figura~\ref{fig:porter} sintetiza la intensidad estimada de cada fuerza y los factores que la determinan.
+
+\begin{figure}[H]
+	\centering
+	\DiagramFig{diagrama-porter.png}
+	\caption{Cinco Fuerzas de Porter aplicadas a GameTrack.}
+	\label{fig:porter}
+\end{figure}
+
+La rivalidad entre competidores existentes se considera alta. El mercado cuenta con plataformas consolidadas como Steam, Backloggd y RAWG, que ofrecen catálogos amplios y distintas funcionalidades de descubrimiento, seguimiento y valoración de videojuegos. Estas soluciones poseen comunidades establecidas, reconocimiento de marca y grandes volúmenes de información. En este contexto, GameTrack no competiría únicamente por ofrecer un catálogo, sino principalmente por captar y mantener la atención de los usuarios. Su diferenciación se encuentra en la combinación de recomendaciones híbridas, explicaciones asociadas a cada sugerencia y análisis de reseñas orientado a desarrolladores, capacidades que actualmente aparecen distribuidas entre distintas plataformas.
+
+La amenaza de nuevos entrantes presenta una intensidad media. Desde una perspectiva técnica, existen barreras de entrada relativamente bajas debido a la disponibilidad de APIs, frameworks de desarrollo y bibliotecas de aprendizaje automático. Estos recursos permiten construir prototipos y servicios de recomendación sin requerir inicialmente una infraestructura de gran escala. Sin embargo, desarrollar una plataforma funcional no garantiza su adopción. La construcción de una comunidad, la generación de un volumen suficiente de interacciones y la obtención de datos útiles para alimentar el filtrado colaborativo constituyen barreras más difíciles de superar. Los productos establecidos se benefician de efectos de red: a medida que aumenta la cantidad de usuarios, también crece la información disponible para mejorar las recomendaciones y la experiencia general.
+
+El poder de negociación de los proveedores se considera alto debido a la dependencia de fuentes externas. GameTrack obtiene metadatos, reseñas, etiquetas e información de popularidad mediante servicios como Steam y SteamSpy. Estos proveedores pueden modificar sus interfaces, limitar la frecuencia de las solicitudes, cambiar sus condiciones de uso o dejar de ofrecer determinados datos. La plataforma no posee control sobre estas decisiones, por lo que una alteración externa puede afectar los procesos de incorporación y actualización del catálogo. Esta condición justifica el almacenamiento local de la información obtenida y la diferenciación entre la ausencia real de un dato y una falla temporal de comunicación.
+
+El poder de negociación de los compradores también se considera alto en el segmento de jugadores. Los usuarios disponen de numerosas alternativas gratuitas y pueden cambiar de plataforma sin afrontar costos significativos. Esto incrementa sus expectativas respecto de la precisión de las recomendaciones, la cantidad de información disponible y la facilidad de uso. La plataforma debe demostrar rápidamente un valor diferencial para evitar que el usuario regrese a soluciones conocidas. En el segmento de desarrolladores existe una menor cantidad de herramientas que combinen el análisis de reseñas con el entorno de descubrimiento destinado a jugadores, lo que reduce parcialmente este poder, aunque permanecen disponibles servicios especializados de inteligencia de mercado y análisis de opiniones.
+
+Finalmente, la amenaza de productos sustitutos es alta. La necesidad de descubrir y evaluar videojuegos puede satisfacerse parcialmente mediante tiendas digitales, sitios de reseñas, redes sociales, videos, transmisiones en vivo, recomendaciones de amigos y asistentes generales de inteligencia artificial. Para los desarrolladores también existen plataformas de análisis de mercado y herramientas especializadas en procesamiento de opiniones. Aunque ninguno de estos sustitutos reúne necesariamente todas las capacidades de GameTrack, su combinación permite al usuario obtener información semejante. Por este motivo, el valor de la propuesta depende de centralizar esas capacidades, reducir el esfuerzo de búsqueda y ofrecer resultados personalizados y explicables.
+
+En conjunto, el análisis muestra un entorno competitivo exigente, caracterizado por una rivalidad elevada, múltiples sustitutos, usuarios con bajos costos de cambio y una dependencia significativa de fuentes externas. La viabilidad diferencial de GameTrack no reside en competir por tamaño de catálogo, sino en integrar recomendaciones personalizadas para jugadores y análisis de opiniones para desarrolladores dentro de una misma plataforma.
+
 \section{Casos de uso}\label{sec:casos_uso}
 
 La figura~\ref{fig:casos_uso} presenta el diagrama de casos de uso del sistema, organizado según los actores definidos en la sección~\ref{sec:actores}. Los casos de uso asociados al jugador se ubican en la columna izquierda, los correspondientes al desarrollador en la superior derecha y los ejecutados por el propio sistema en la inferior derecha.
 
 \begin{figure}[ht]
 	\centering
-	\PlaceholderFig{diagrama-casos-uso.png}
+	\DiagramFig{diagrama-casos-uso.png}
 	\caption{Diagrama de casos de uso de GameTrack.}
 	\label{fig:casos_uso}
 \end{figure}
 
 La tabla~\ref{tab:casos_uso} resume los trece casos de uso identificados y su correspondencia con los requerimientos funcionales especificados en la sección~\ref{sec:rf}. A continuación se detallan los cuatro casos de uso de mayor relevancia para los objetivos del trabajo.
 
-\begin{longtable}{>{\raggedright\arraybackslash}p{1.1cm} >{\raggedright\arraybackslash}p{4.8cm} >{\raggedright\arraybackslash}p{3.1cm} >{\raggedright\arraybackslash}p{3.1cm}}
+\begin{longtable}{|>{\raggedright\arraybackslash}p{1.1cm}|>{\raggedright\arraybackslash}p{4.8cm}|>{\raggedright\arraybackslash}p{3.1cm}|>{\raggedright\arraybackslash}p{3.1cm}|}
 	\caption{Casos de uso del sistema.}\label{tab:casos_uso} \\
 	\hline
 	\textbf{ID} & \textbf{Nombre} & \textbf{Actor} & \textbf{Requerimientos} \\
@@ -143,7 +195,7 @@ La tabla~\ref{tab:casos_uso} resume los trece casos de uso identificados y su co
 
 La tabla~\ref{tab:cu08} especifica el caso de uso CU-08: Obtener recomendaciones personalizadas.
 
-\begin{longtable}{>{\bfseries\raggedright\arraybackslash}p{2.8cm} >{\raggedright\arraybackslash}p{10cm}}
+\begin{longtable}{|>{\bfseries\raggedright\arraybackslash}p{2.8cm}|>{\raggedright\arraybackslash}p{10cm}|}
 	\caption{Especificación del caso de uso CU-08: Obtener recomendaciones personalizadas.}\label{tab:cu08} \\
 	\hline
 	\endfirsthead
@@ -180,7 +232,7 @@ La tabla~\ref{tab:cu08} especifica el caso de uso CU-08: Obtener recomendaciones
 
 La tabla~\ref{tab:cu09} especifica el caso de uso CU-09: Utilizar el asistente de decisión.
 
-\begin{longtable}{>{\bfseries\raggedright\arraybackslash}p{2.8cm} >{\raggedright\arraybackslash}p{10cm}}
+\begin{longtable}{|>{\bfseries\raggedright\arraybackslash}p{2.8cm}|>{\raggedright\arraybackslash}p{10cm}|}
 	\caption{Especificación del caso de uso CU-09: Utilizar el asistente de decisión.}\label{tab:cu09} \\
 	\hline
 	\endfirsthead
@@ -215,7 +267,7 @@ La tabla~\ref{tab:cu09} especifica el caso de uso CU-09: Utilizar el asistente d
 
 La tabla~\ref{tab:cu10} especifica el caso de uso CU-10: Consultar la recepción de un título.
 
-\begin{longtable}{>{\bfseries\raggedright\arraybackslash}p{2.8cm} >{\raggedright\arraybackslash}p{10cm}}
+\begin{longtable}{|>{\bfseries\raggedright\arraybackslash}p{2.8cm}|>{\raggedright\arraybackslash}p{10cm}|}
 	\caption{Especificación del caso de uso CU-10: Consultar la recepción de un título.}\label{tab:cu10} \\
 	\hline
 	\endfirsthead
@@ -248,7 +300,7 @@ La tabla~\ref{tab:cu10} especifica el caso de uso CU-10: Consultar la recepción
 
 La tabla~\ref{tab:cu12} especifica el caso de uso CU-12: Analizar una reseña.
 
-\begin{longtable}{>{\bfseries\raggedright\arraybackslash}p{2.8cm} >{\raggedright\arraybackslash}p{10cm}}
+\begin{longtable}{|>{\bfseries\raggedright\arraybackslash}p{2.8cm}|>{\raggedright\arraybackslash}p{10cm}|}
 	\caption{Especificación del caso de uso CU-12: Analizar una reseña.}\label{tab:cu12} \\
 	\hline
 	\endfirsthead
@@ -283,12 +335,14 @@ La tabla~\ref{tab:cu12} especifica el caso de uso CU-12: Analizar una reseña.
 
 A partir de los requerimientos definidos, se diseñó la arquitectura de GameTrack procurando mantener una separación clara de responsabilidades y facilitar la ejecución local del prototipo. La figura~\ref{fig:arquitectura} presenta los componentes principales del sistema, su organización interna y la comunicación con las fuentes externas de datos.
 
-\begin{figure}[ht]
+\begin{landscape}
+\begin{figure}[H]
 	\centering
-	\PlaceholderFig{arquitectura-despliegue.png}
+	\WideDiagramFig{arquitectura-despliegue.png}
 	\caption{Arquitectura lógica y de despliegue de GameTrack.}
 	\label{fig:arquitectura}
 \end{figure}
+\end{landscape}
 
 La figura presenta la arquitectura lógica y de despliegue de GameTrack. El sistema adopta una arquitectura monolítica modular, ya que todos sus componentes se ejecutan dentro de un único proceso Python basado en Uvicorn y FastAPI, aunque se encuentran separados internamente según sus responsabilidades.
 
@@ -302,12 +356,14 @@ La información se almacena localmente en una base de datos SQLite, aunque el si
 
 A partir de los requerimientos establecidos, se definió el modelo de dominio de GameTrack. Este modelo representa las principales entidades administradas por la plataforma, sus atributos más relevantes y las relaciones existentes entre ellas. La figura~\ref{fig:diagrama_clases} presenta el correspondiente diagrama de clases, centrado en la gestión de usuarios, videojuegos, preferencias, interacciones, reseñas y listas.
 
-\begin{figure}[ht]
+\begin{landscape}
+\begin{figure}[H]
 	\centering
-	\PlaceholderFig{diagrama-clases.png}
+	\WideDiagramFig{diagrama-clases.png}
 	\caption{Diagrama de clases del dominio de GameTrack.}
 	\label{fig:diagrama_clases}
 \end{figure}
+\end{landscape}
 
 El modelo se estructura alrededor de las clases \texttt{User} y \texttt{Game}. La primera representa a los usuarios registrados en la plataforma y distingue, mediante el atributo \texttt{role}, entre jugadores y desarrolladores. Cada usuario puede declarar múltiples preferencias de género mediante \texttt{UserPreference}, registrar calificaciones y horas jugadas a través de \texttt{Rating}, escribir reseñas y crear diferentes listas de videojuegos.
 
@@ -323,12 +379,14 @@ Finalmente, la organización personal de videojuegos se modela mediante \texttt{
 
 A partir del modelo de dominio presentado en la sección anterior, se definió el esquema relacional utilizado para almacenar la información de la plataforma. Mientras que el diagrama de clases representa las entidades principales desde una perspectiva conceptual, el diagrama entidad-relación de la figura~\ref{fig:diagrama_er} muestra su implementación concreta en la base de datos, incluyendo tablas, atributos, claves primarias, claves foráneas, restricciones de unicidad y relaciones entre los registros.
 
-\begin{figure}[ht]
+\begin{landscape}
+\begin{figure}[H]
 	\centering
-	\PlaceholderFig{diagrama-er.png}
+	\WideDiagramFig{diagrama-er.png}
 	\caption{Diagrama entidad-relación de la base de datos de GameTrack.}
 	\label{fig:diagrama_er}
 \end{figure}
+\end{landscape}
 
 La tabla \texttt{users} centraliza la información de las personas registradas y permite distinguir entre jugadores y desarrolladores mediante el atributo correspondiente al rol. Los datos específicos de cada jugador, como sus preferencias de género, calificaciones, reseñas y listas, se relacionan con esta tabla por medio de claves foráneas. La tabla \texttt{user\_preferences} resuelve la relación entre usuarios y géneros, permitiendo asignar un peso a cada preferencia declarada.
 
@@ -348,7 +406,7 @@ El modelo incorpora restricciones de integridad referencial y de unicidad para e
 
 Los casos de uso especifican el comportamiento del sistema desde la perspectiva de su interacción con los actores. Las historias de usuario, en cambio, expresan cada necesidad desde el punto de vista de quien la tiene e incorporan el motivo que la justifica, lo que las vuelve adecuadas para verificar que cada funcionalidad responda a un beneficio identificable. La tabla~\ref{tab:historias_usuario} presenta las historias definidas, con sus criterios de aceptación y su correspondencia con los requerimientos y casos de uso.
 
-\begin{longtable}{>{\raggedright\arraybackslash}p{1cm} >{\raggedright\arraybackslash}p{4.6cm} >{\raggedright\arraybackslash}p{5.2cm} >{\raggedright\arraybackslash}p{2cm}}
+\begin{longtable}{|>{\raggedright\arraybackslash}p{1cm}|>{\raggedright\arraybackslash}p{4.6cm}|>{\raggedright\arraybackslash}p{5.2cm}|>{\raggedright\arraybackslash}p{2cm}|}
 	\caption{Historias de usuario del sistema.}\label{tab:historias_usuario} \\
 	\hline
 	\textbf{ID} & \textbf{Historia} & \textbf{Criterios de aceptación} & \textbf{Trazabilidad} \\

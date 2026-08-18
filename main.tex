@@ -27,6 +27,9 @@
 
 % Para flotar figuras y tablas
 \usepackage{framed}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{pdflscape}
 
 % Para asegurar que las figuras y tablas queden en la secci\'on correspondiente
 \usepackage[section,above,below]{placeins}
@@ -116,6 +119,30 @@
 		\centering
 		\textit{[Insertar imagen: #1]}
 	\end{framed}
+}
+\newcommand{\ScreenshotFig}[1]{%
+	\includegraphics[width=\textwidth]{./images/#1}%
+}
+\newcommand{\SurveyFig}[1]{%
+	\IfFileExists{./images/#1}{%
+		\includegraphics[width=\textwidth]{./images/#1}%
+	}{%
+		\PlaceholderFig{#1}%
+	}%
+}
+\newcommand{\DiagramFig}[1]{%
+	\IfFileExists{./images/#1}{%
+		\includegraphics[width=\textwidth,height=.78\textheight,keepaspectratio]{./images/#1}%
+	}{%
+		\PlaceholderFig{#1}%
+	}%
+}
+\newcommand{\WideDiagramFig}[1]{%
+	\IfFileExists{./images/#1}{%
+		\includegraphics[width=\linewidth,height=.78\textheight,keepaspectratio]{./images/#1}%
+	}{%
+		\PlaceholderFig{#1}%
+	}%
 }
 
 %Espaciado antes y despu\'es de una figura respecto del texto
