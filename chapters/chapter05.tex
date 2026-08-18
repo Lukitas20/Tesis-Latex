@@ -1,0 +1,441 @@
+\chapter{Análisis de Requerimientos}\label{chapter:requerimientos}
+
+A partir de los objetivos planteados en la sección~\ref{sec:objetivos}, de las oportunidades identificadas en el estado del arte y de los resultados del relevamiento de usuarios, se especifican en este capítulo los requerimientos que debe satisfacer el sistema. Se distinguen los requerimientos funcionales, que describen las capacidades que la plataforma debe proveer, de los requerimientos no funcionales, que establecen restricciones y atributos de calidad sobre esas capacidades. Cada requerimiento incorpora la referencia a su origen, de modo que resulte posible trazar toda funcionalidad del sistema hasta el objetivo, la oportunidad o la evidencia empírica que la motiva.
+
+\section{Actores del sistema}\label{sec:actores}
+
+Se identifican dos actores principales, que se corresponden con la naturaleza dual del problema abordado y que determinan la separación de funcionalidades dentro de la plataforma:
+
+\begin{itemize}
+	\item \textbf{Jugador}: Usuario que utiliza la plataforma para registrar su actividad de juego, calificar y reseñar títulos, organizarlos en listas y recibir recomendaciones personalizadas. Constituye el actor principal en términos de volumen de interacción y es la fuente de las señales que alimentan el perfilado.
+	\item \textbf{Desarrollador}: Usuario asociado a un estudio, que utiliza la plataforma para consultar información sobre la recepción de sus propios títulos a partir del análisis de las reseñas de los jugadores. No participa de las funcionalidades de recomendación ni de registro de actividad.
+\end{itemize}
+
+Se considera además un actor secundario de naturaleza no humana, el proveedor externo de datos, integrado por los servicios de los que el sistema obtiene el catálogo de títulos y las reseñas que alimentan el análisis. Su tratamiento como actor resulta relevante porque su comportamiento, y en particular su eventual indisponibilidad, condiciona requerimientos no funcionales del sistema, de acuerdo con las dependencias externas identificadas durante el análisis del estado del arte.
+
+La distinción entre ambos roles se resuelve en el momento del registro y determina las funcionalidades accesibles para cada usuario. Un mismo usuario no cumple simultáneamente los dos roles, criterio que se refleja también en el diseño de la navegación de la interfaz.
+
+\section{Requerimientos funcionales}\label{sec:rf}
+
+La tabla~\ref{tab:rf} detalla los requerimientos funcionales del sistema, agrupados según el actor que los ejercita. Se identifican con el prefijo RF y una numeración correlativa que se utiliza como referencia en el resto del documento.
+
+\setlength{\tabcolsep}{4pt}
+\begin{longtable}{>{\raggedright\arraybackslash}p{1.1cm} >{\raggedright\arraybackslash}p{7.4cm} >{\raggedright\arraybackslash}p{1.6cm} >{\raggedright\arraybackslash}p{2.9cm}}
+	\caption{Requerimientos funcionales del sistema.}\label{tab:rf} \\
+	\hline
+	\textbf{ID} & \textbf{Descripción} & \textbf{Actor} & \textbf{Origen} \\
+	\hline
+	\endfirsthead
+	\multicolumn{4}{l}{\textit{Continuación de la Tabla \ref{tab:rf}}} \\
+	\hline
+	\textbf{ID} & \textbf{Descripción} & \textbf{Actor} & \textbf{Origen} \\
+	\hline
+	\endhead
+	\hline
+	\endfoot
+	\hline
+	\endlastfoot
+	RF-01 & El sistema debe permitir el registro y la autenticación de usuarios, distinguiendo el rol de jugador del de desarrollador. & Ambos & Alcance (\ref{sec:alcance}) \\
+	RF-02 & El sistema debe permitir consultar y modificar los datos del perfil propio. & Ambos & Alcance (\ref{sec:alcance}) \\
+	RF-03 & El sistema debe permitir explorar y buscar el catálogo de videojuegos por texto, género y etiqueta. & Jugador & Alcance (\ref{sec:alcance}) \\
+	RF-04 & El sistema debe permitir consultar la ficha detallada de un videojuego, incluyendo sus metadatos y sus reseñas. & Jugador & Encuesta P9 \\
+	RF-05 & El sistema debe permitir calificar un videojuego en una escala de 1 a 5 y registrar las horas jugadas y el estado del título. & Jugador & Objetivo específico; Encuesta P13 \\
+	RF-06 & El sistema debe permitir escribir reseñas sobre los videojuegos. & Jugador & Objetivo específico \\
+	RF-07 & El sistema debe permitir declarar preferencias de género durante la incorporación del usuario. & Jugador & Encuesta P13 \\
+	RF-08 & El sistema debe permitir organizar los videojuegos en listas, tanto automáticas como definidas por el usuario. & Jugador & Encuesta P14, P16 \\
+	RF-09 & El sistema debe generar recomendaciones personalizadas combinando filtrado basado en contenido y filtrado colaborativo. & Jugador & Oportunidad 1 (\ref{sec:oportunidades}); Encuesta P11, P12 \\
+	RF-10 & El sistema debe generar recomendaciones útiles para usuarios sin historial previo, mediante un mecanismo de respaldo basado en popularidad. & Jugador & Oportunidad 1 (\ref{sec:oportunidades}); Marco teórico (\ref{subsec:aplicacion_perfilado}) \\
+	RF-11 & El sistema debe informar el motivo por el cual cada título fue recomendado. & Jugador & Introducción (\ref{chapter:introduccion}); Encuesta P19 \\
+	RF-12 & El sistema debe ofrecer un asistente que, a partir de un conjunto acotado de preguntas sobre el contexto actual, sugiera títulos para el momento. & Jugador & Objetivo específico; Encuesta P5 \\
+	RF-13 & El sistema debe permitir consultar títulos similares a uno dado. & Jugador & Oportunidad 1 (\ref{sec:oportunidades}) \\
+	RF-14 & El sistema debe permitir vincular una cuenta de Steam e incorporar la biblioteca del usuario. & Jugador & Encuesta P2, P13 \\
+	RF-15 & El sistema debe analizar automáticamente las reseñas, clasificando su sentimiento global y el sentimiento asociado a cada aspecto mencionado. & Sistema & Oportunidad 3 (\ref{sec:oportunidades}); Marco teórico (\ref{subsec:absa}) \\
+	RF-16 & El sistema debe conservar, para cada aspecto identificado, el fragmento textual que justifica la clasificación. & Sistema & Marco teórico (\ref{subsec:resumen_opiniones}); Encuesta P19 \\
+	RF-17 & El sistema debe incorporar y actualizar el catálogo de videojuegos a partir de las fuentes externas. & Sistema & Alcance (\ref{sec:alcance}) \\
+	RF-18 & El sistema debe presentar la recepción de los títulos del estudio, desagregada por aspecto. & Desarrollador & Oportunidad 3 (\ref{sec:oportunidades}); Encuesta P17 \\
+	RF-19 & El sistema debe permitir consultar la evidencia textual que respalda cada resultado del análisis. & Desarrollador & Marco teórico (\ref{subsec:resumen_opiniones}) \\
+\end{longtable}
+
+Los requerimientos RF-09 a RF-13 constituyen el núcleo funcional orientado al jugador y responden de manera directa a la primera y la segunda oportunidad identificadas en la sección~\ref{sec:oportunidades}. En particular, RF-10 aborda el problema del arranque en frío descrito en la sección~\ref{subsec:aplicacion_perfilado}, mientras que RF-11 responde a una limitación señalada en la introducción del trabajo, la escasa explicabilidad de las soluciones actuales, y encuentra respaldo empírico en las respuestas abiertas del relevamiento de usuarios, donde se solicitó de manera espontánea que las recomendaciones fueran explicadas mediante mecánicas y aspectos similares.
+
+Los requerimientos RF-15, RF-16, RF-18 y RF-19 conforman el módulo orientado al desarrollador y materializan la tercera oportunidad, identificada como la más diferencial. Su pertinencia se encuentra validada por el relevamiento: el 87,6\% de los encuestados consideró que los desarrolladores se beneficiarían de conocer mejor a sus jugadores.
+
+\section{Requerimientos no funcionales}\label{sec:rnf}
+
+La tabla~\ref{tab:rnf} detalla los requerimientos no funcionales, organizados según el atributo de calidad que expresan. A diferencia de los funcionales, estos no describen capacidades observables por el usuario sino restricciones que condicionan la manera en que dichas capacidades se implementan, y su cumplimiento se verifica de forma transversal.
+
+\begin{longtable}{>{\raggedright\arraybackslash}p{1.1cm} >{\raggedright\arraybackslash}p{2cm} >{\raggedright\arraybackslash}p{7cm} >{\raggedright\arraybackslash}p{2.6cm}}
+	\caption{Requerimientos no funcionales del sistema.}\label{tab:rnf} \\
+	\hline
+	\textbf{ID} & \textbf{Atributo} & \textbf{Descripción} & \textbf{Origen} \\
+	\hline
+	\endfirsthead
+	\multicolumn{4}{l}{\textit{Continuación de la Tabla \ref{tab:rnf}}} \\
+	\hline
+	\textbf{ID} & \textbf{Atributo} & \textbf{Descripción} & \textbf{Origen} \\
+	\hline
+	\endhead
+	\hline
+	\endfoot
+	\hline
+	\endlastfoot
+	RNF-01 & Explicabilidad & Toda recomendación debe presentarse acompañada de su motivo, y toda clasificación de sentimiento debe conservar la evidencia textual que la sustenta. & Introducción (\ref{chapter:introduccion}); Encuesta P19 \\
+	RNF-02 & Disponibilidad del servicio & El sistema debe producir recomendaciones útiles aun cuando el usuario no posea historial de interacciones. & Marco teórico (\ref{subsec:aplicacion_perfilado}) \\
+	RNF-03 & Tolerancia a fallos externos & La indisponibilidad de una fuente externa no debe interpretarse como ausencia de datos ni degradar la información previamente almacenada. & Estado del arte (\ref{sec:comparativa_plataformas}, \ref{sec:oportunidades}) \\
+	RNF-04 & Reproducibilidad & El sistema debe poder desplegarse de forma local en un único proceso, sin requerir servicios externos obligatorios ni etapas de compilación. & Alcance (\ref{sec:alcance}) \\
+	RNF-05 & Portabilidad & El modelo de datos debe operar sobre SQLite y sobre PostgreSQL sin modificaciones en el código de la aplicación. & Alcance (\ref{sec:alcance}) \\
+	RNF-06 & Idioma & El módulo de análisis de reseñas debe operar sobre texto en español. & Alcance (\ref{sec:alcance}) \\
+	RNF-07 & Seguridad & Las contraseñas deben almacenarse mediante funciones de hash con sal, y la autorización por rol debe resolverse en el servidor. & Buenas prácticas \\
+	RNF-08 & Rendimiento & Las consultas de recomendación no deben requerir el recálculo de agregados en cada solicitud. & Marco teórico (\ref{subsec:desafios_recomendacion}) \\
+	RNF-09 & Accesibilidad & La paleta utilizada en las visualizaciones debe garantizar contraste suficiente y resultar distinguible bajo las deficiencias más frecuentes de visión cromática. & Buenas prácticas \\
+	RNF-10 & Mantenibilidad & El sistema debe contar con un conjunto de pruebas automatizadas que permita verificar su comportamiento tras cada modificación. & Buenas prácticas \\
+	RNF-11 & Escalabilidad del catálogo & Los modelos deben construirse sin generar estructuras cuyo tamaño crezca de forma cuadrática respecto de la cantidad de títulos del catálogo. & Marco teórico (\ref{subsec:desafios_recomendacion}) \\
+\end{longtable}
+
+Los requerimientos no funcionales definidos buscan garantizar que las funcionalidades del sistema puedan implementarse de manera confiable, eficiente y sostenible. En particular, RNF-03 establece que una falla de comunicación con un proveedor externo no debe eliminar ni modificar la información previamente almacenada. Esta distinción permite preservar la integridad de los datos y mantener el funcionamiento de la plataforma ante interrupciones temporales de servicios externos.
+
+Por otra parte, RNF-11 establece una restricción sobre la escalabilidad del módulo de recomendación. Debido a que el catálogo puede incorporar una cantidad creciente de videojuegos, la solución debe evitar estructuras cuyo consumo de memoria aumente de manera cuadrática respecto del número de títulos. De esta forma, el sistema podrá ampliar su catálogo sin que el costo computacional comprometa su rendimiento o viabilidad técnica.
+
+\section{Casos de uso}\label{sec:casos_uso}
+
+La figura~\ref{fig:casos_uso} presenta el diagrama de casos de uso del sistema, organizado según los actores definidos en la sección~\ref{sec:actores}. Los casos de uso asociados al jugador se ubican en la columna izquierda, los correspondientes al desarrollador en la superior derecha y los ejecutados por el propio sistema en la inferior derecha.
+
+\begin{figure}[ht]
+	\centering
+	\PlaceholderFig{diagrama-casos-uso.png}
+	\caption{Diagrama de casos de uso de GameTrack.}
+	\label{fig:casos_uso}
+\end{figure}
+
+La tabla~\ref{tab:casos_uso} resume los trece casos de uso identificados y su correspondencia con los requerimientos funcionales especificados en la sección~\ref{sec:rf}. A continuación se detallan los cuatro casos de uso de mayor relevancia para los objetivos del trabajo.
+
+\begin{longtable}{>{\raggedright\arraybackslash}p{1.1cm} >{\raggedright\arraybackslash}p{4.8cm} >{\raggedright\arraybackslash}p{3.1cm} >{\raggedright\arraybackslash}p{3.1cm}}
+	\caption{Casos de uso del sistema.}\label{tab:casos_uso} \\
+	\hline
+	\textbf{ID} & \textbf{Nombre} & \textbf{Actor} & \textbf{Requerimientos} \\
+	\hline
+	\endfirsthead
+	\multicolumn{4}{l}{\textit{Continuación de la Tabla \ref{tab:casos_uso}}} \\
+	\hline
+	\textbf{ID} & \textbf{Nombre} & \textbf{Actor} & \textbf{Requerimientos} \\
+	\hline
+	\endhead
+	\hline
+	\endfoot
+	\hline
+	\endlastfoot
+	CU-01 & Registrarse e iniciar sesión & Jugador, Desarrollador & RF-01, RF-02 \\
+	CU-02 & Explorar y buscar el catálogo & Jugador & RF-03, RF-04 \\
+	CU-03 & Calificar y registrar actividad de juego & Jugador & RF-05 \\
+	CU-04 & Escribir una reseña & Jugador & RF-06 \\
+	CU-05 & Gestionar listas & Jugador & RF-08 \\
+	CU-06 & Vincular cuenta de Steam & Jugador & RF-14 \\
+	CU-07 & Consultar títulos similares & Jugador & RF-13 \\
+	CU-08 & Obtener recomendaciones personalizadas & Jugador & RF-07, RF-09, RF-10, RF-11 \\
+	CU-09 & Utilizar el asistente de decisión & Jugador & RF-11, RF-12 \\
+	CU-10 & Consultar la recepción de un título & Desarrollador & RF-18 \\
+	CU-11 & Consultar la evidencia de un aspecto & Desarrollador & RF-19 \\
+	CU-12 & Analizar una reseña & Sistema & RF-15, RF-16 \\
+	CU-13 & Incorporar el catálogo desde fuentes externas & Sistema & RF-17 \\
+\end{longtable}
+
+\subsection{CU-08: Obtener recomendaciones personalizadas}\label{subsec:cu08}
+
+La tabla~\ref{tab:cu08} especifica el caso de uso CU-08: Obtener recomendaciones personalizadas.
+
+\begin{longtable}{>{\bfseries\raggedright\arraybackslash}p{2.8cm} >{\raggedright\arraybackslash}p{10cm}}
+	\caption{Especificación del caso de uso CU-08: Obtener recomendaciones personalizadas.}\label{tab:cu08} \\
+	\hline
+	\endfirsthead
+	\hline
+	\endfoot
+	\hline
+	\endlastfoot
+	Actor principal & Jugador \\
+	\hline
+	Requerimientos & RF-07, RF-09, RF-10, RF-11 \\
+	\hline
+	Precondición & El usuario se encuentra autenticado. \\
+	\hline
+	Postcondición & El usuario visualiza un conjunto de títulos sugeridos, cada uno acompañado del motivo por el cual fue recomendado. \\
+	\hline
+	Flujo principal &
+	\begin{enumerate}[leftmargin=1.1em, itemsep=2pt, topsep=2pt]
+		\item El usuario accede a la sección de recomendaciones.
+		\item El sistema recupera el perfil del usuario, construido a partir de sus calificaciones, horas registradas, reseñas y preferencias declaradas.
+		\item El sistema estima la afinidad de los títulos no consumidos mediante filtrado basado en contenido.
+		\item El sistema estima la afinidad mediante filtrado colaborativo sobre la matriz de interacciones.
+		\item El sistema combina ambas estimaciones y ordena los títulos resultantes.
+		\item El sistema presenta las sugerencias junto con el motivo de cada una.
+	\end{enumerate} \\
+	\hline
+	Flujo alternativo A & 2.a. El usuario no registra interacciones previas. El sistema genera las sugerencias mediante el mecanismo de respaldo basado en popularidad y lo declara en el motivo. El caso de uso continúa en el paso 6. \\
+	\hline
+	Flujo alternativo B & 4.a. El volumen de interacciones resulta insuficiente para el filtrado colaborativo. El sistema pondera únicamente la componente basada en contenido y el caso de uso continúa en el paso 5. \\
+	\hline
+	Excepción & 2.b. El catálogo no contiene títulos con rasgos suficientes para comparar. El sistema informa la situación en lugar de devolver un resultado vacío sin explicación. \\
+\end{longtable}
+
+\subsection{CU-09: Utilizar el asistente de decisión}\label{subsec:cu09}
+
+La tabla~\ref{tab:cu09} especifica el caso de uso CU-09: Utilizar el asistente de decisión.
+
+\begin{longtable}{>{\bfseries\raggedright\arraybackslash}p{2.8cm} >{\raggedright\arraybackslash}p{10cm}}
+	\caption{Especificación del caso de uso CU-09: Utilizar el asistente de decisión.}\label{tab:cu09} \\
+	\hline
+	\endfirsthead
+	\hline
+	\endfoot
+	\hline
+	\endlastfoot
+	Actor principal & Jugador \\
+	\hline
+	Requerimientos & RF-11, RF-12 \\
+	\hline
+	Precondición & Existe un catálogo con títulos caracterizados por géneros o etiquetas. \\
+	\hline
+	Postcondición & El usuario recibe un conjunto acotado de sugerencias ajustadas al contexto declarado, con indicación de los criterios que debieron relajarse, si los hubiera. \\
+	\hline
+	Flujo principal &
+	\begin{enumerate}[leftmargin=1.1em, itemsep=2pt, topsep=2pt]
+		\item El usuario inicia el asistente.
+		\item El sistema presenta sucesivamente las preguntas sobre el contexto actual y la preferencia del momento.
+		\item El usuario responde cada pregunta.
+		\item El sistema traduce las respuestas en restricciones de cumplimiento obligatorio y en preferencias graduales.
+		\item El sistema descarta los títulos que no satisfacen las restricciones y ordena los restantes según las preferencias.
+		\item El sistema presenta las sugerencias resultantes.
+	\end{enumerate} \\
+	\hline
+	Flujo alternativo & 5.a. Las restricciones no dejan candidatos suficientes. El sistema las relaja siguiendo un orden predefinido, informa de manera explícita cuáles fueron relajadas y el caso de uso continúa en el paso 6. \\
+	\hline
+	Regla de negocio & La relajación de una restricción nunca puede ser silenciosa: el usuario debe poder distinguir un resultado que satisface todos sus criterios de otro que solo satisface algunos. \\
+\end{longtable}
+
+\subsection{CU-10: Consultar la recepción de un título}\label{subsec:cu10}
+
+La tabla~\ref{tab:cu10} especifica el caso de uso CU-10: Consultar la recepción de un título.
+
+\begin{longtable}{>{\bfseries\raggedright\arraybackslash}p{2.8cm} >{\raggedright\arraybackslash}p{10cm}}
+	\caption{Especificación del caso de uso CU-10: Consultar la recepción de un título.}\label{tab:cu10} \\
+	\hline
+	\endfirsthead
+	\hline
+	\endfoot
+	\hline
+	\endlastfoot
+	Actor principal & Desarrollador \\
+	\hline
+	Requerimientos & RF-18 \\
+	\hline
+	Precondición & El usuario se encuentra autenticado con rol de desarrollador y su estudio posee títulos registrados con reseñas analizadas. \\
+	\hline
+	Postcondición & El usuario visualiza la distribución de sentimiento por aspecto correspondiente a sus títulos. \\
+	\hline
+	Flujo principal &
+	\begin{enumerate}[leftmargin=1.1em, itemsep=2pt, topsep=2pt]
+		\item El usuario accede al panel del estudio.
+		\item El sistema recupera los títulos asociados al estudio.
+		\item El sistema agrega, para cada título, los resultados del análisis por aspecto.
+		\item El sistema presenta la distribución de sentimiento desagregada por aspecto.
+	\end{enumerate} \\
+	\hline
+	Extensión & 4.a. El usuario selecciona un aspecto y el sistema muestra los fragmentos textuales que sustentan la clasificación (CU-11). \\
+	\hline
+	Excepción & 3.a. El título no posee reseñas analizadas en cantidad suficiente. El sistema informa la ausencia de datos en lugar de presentar una distribución construida sobre pocas observaciones. \\
+\end{longtable}
+
+\subsection{CU-12: Analizar una reseña}\label{subsec:cu12}
+
+La tabla~\ref{tab:cu12} especifica el caso de uso CU-12: Analizar una reseña.
+
+\begin{longtable}{>{\bfseries\raggedright\arraybackslash}p{2.8cm} >{\raggedright\arraybackslash}p{10cm}}
+	\caption{Especificación del caso de uso CU-12: Analizar una reseña.}\label{tab:cu12} \\
+	\hline
+	\endfirsthead
+	\hline
+	\endfoot
+	\hline
+	\endlastfoot
+	Actor principal & Sistema. Se dispara al registrarse una reseña de un usuario (CU-04) o al incorporarse reseñas externas (CU-13). \\
+	\hline
+	Requerimientos & RF-15, RF-16 \\
+	\hline
+	Precondición & Existe al menos una reseña pendiente de análisis. \\
+	\hline
+	Postcondición & La reseña queda marcada como analizada, con su sentimiento global registrado y una fila por cada aspecto efectivamente mencionado, cada una con su fragmento textual asociado. \\
+	\hline
+	Flujo principal &
+	\begin{enumerate}[leftmargin=1.1em, itemsep=2pt, topsep=2pt]
+		\item El sistema recupera las reseñas pendientes de análisis.
+		\item El sistema preprocesa el texto.
+		\item El sistema determina la polaridad global del texto.
+		\item El sistema identifica los aspectos mencionados y determina la polaridad asociada a cada uno.
+		\item El sistema registra, por cada aspecto, su polaridad y el fragmento que la justifica.
+		\item El sistema marca la reseña como analizada y actualiza los agregados del título.
+	\end{enumerate} \\
+	\hline
+	Flujo alternativo & 4.a. El texto no menciona ningún aspecto contemplado. La reseña se marca como analizada sin generar filas de aspecto, lo que permite distinguirla de una reseña aún no procesada. \\
+	\hline
+	Regla de negocio & El indicador de análisis y la ausencia de aspectos son informaciones distintas y deben poder diferenciarse: una reseña analizada sin aspectos es un resultado válido, no un procesamiento pendiente. \\
+\end{longtable}
+
+\section{Arquitectura lógica y de despliegue}\label{sec:arquitectura}
+
+A partir de los requerimientos definidos, se diseñó la arquitectura de GameTrack procurando mantener una separación clara de responsabilidades y facilitar la ejecución local del prototipo. La figura~\ref{fig:arquitectura} presenta los componentes principales del sistema, su organización interna y la comunicación con las fuentes externas de datos.
+
+\begin{figure}[ht]
+	\centering
+	\PlaceholderFig{arquitectura-despliegue.png}
+	\caption{Arquitectura lógica y de despliegue de GameTrack.}
+	\label{fig:arquitectura}
+\end{figure}
+
+La figura presenta la arquitectura lógica y de despliegue de GameTrack. El sistema adopta una arquitectura monolítica modular, ya que todos sus componentes se ejecutan dentro de un único proceso Python basado en Uvicorn y FastAPI, aunque se encuentran separados internamente según sus responsabilidades.
+
+El usuario accede a la plataforma desde un navegador. FastAPI entrega el frontend estático, desarrollado con HTML, CSS y JavaScript, y expone una API REST bajo la ruta \texttt{/api/v1}. Las solicitudes enviadas a esta API son autenticadas mediante tokens JWT, autorizadas según el rol del usuario y validadas con schemas de Pydantic.
+
+La lógica principal se concentra en los servicios de negocio, que coordinan el acceso a la base de datos y la ejecución de los módulos inteligentes. El motor híbrido genera recomendaciones combinando TF-IDF, filtrado colaborativo y un mecanismo de respaldo basado en popularidad. Por su parte, el módulo de análisis de sentimiento y ABSA procesa las reseñas en español para identificar su polaridad global y las opiniones asociadas a aspectos específicos de los videojuegos.
+
+La información se almacena localmente en una base de datos SQLite, aunque el sistema también admite PostgreSQL mediante configuración. Asimismo, GameTrack se integra con Steam y SteamSpy para obtener fichas de videojuegos, bibliotecas de usuarios, reseñas, etiquetas comunitarias y señales de popularidad. RAWG se mantiene como una fuente alternativa opcional. Finalmente, los scripts de ingesta y mantenimiento se ejecutan de manera independiente al flujo habitual de la aplicación para poblar y actualizar la información almacenada.
+
+\section{Diagrama de clases del dominio}\label{sec:diagrama_clases}
+
+A partir de los requerimientos establecidos, se definió el modelo de dominio de GameTrack. Este modelo representa las principales entidades administradas por la plataforma, sus atributos más relevantes y las relaciones existentes entre ellas. La figura~\ref{fig:diagrama_clases} presenta el correspondiente diagrama de clases, centrado en la gestión de usuarios, videojuegos, preferencias, interacciones, reseñas y listas.
+
+\begin{figure}[ht]
+	\centering
+	\PlaceholderFig{diagrama-clases.png}
+	\caption{Diagrama de clases del dominio de GameTrack.}
+	\label{fig:diagrama_clases}
+\end{figure}
+
+El modelo se estructura alrededor de las clases \texttt{User} y \texttt{Game}. La primera representa a los usuarios registrados en la plataforma y distingue, mediante el atributo \texttt{role}, entre jugadores y desarrolladores. Cada usuario puede declarar múltiples preferencias de género mediante \texttt{UserPreference}, registrar calificaciones y horas jugadas a través de \texttt{Rating}, escribir reseñas y crear diferentes listas de videojuegos.
+
+La clase \texttt{Game} concentra la información principal de cada título, incluyendo sus identificadores externos, nombre, descripción, desarrollador, plataformas y métricas agregadas. Cada videojuego puede asociarse con múltiples géneros y etiquetas, y tanto \texttt{Genre} como \texttt{Tag} pueden caracterizar a varios títulos. Estas relaciones de muchos a muchos proporcionan los atributos utilizados por los filtros de búsqueda y por el componente de recomendación basado en contenido.
+
+Las interacciones entre usuarios y videojuegos se representan principalmente mediante \texttt{Rating} y \texttt{Review}. \texttt{Rating} almacena la calificación explícita, las horas jugadas y el estado del título dentro del historial del usuario. Esta información constituye una de las principales entradas del filtrado colaborativo. \texttt{Review}, por su parte, contiene el texto de la opinión, su procedencia y los resultados generales obtenidos mediante el módulo de análisis de sentimiento.
+
+Cada reseña puede producir entre cero y cuatro instancias de \texttt{ReviewAspect}, correspondientes a los aspectos de jugabilidad, gráficos, historia y optimización. Estas instancias almacenan el sentimiento identificado, su puntaje, el nivel de confianza y la evidencia textual que justifica la clasificación. La relación se representa mediante una composición, dado que un resultado por aspecto no puede existir independientemente de la reseña analizada.
+
+Finalmente, la organización personal de videojuegos se modela mediante \texttt{GameList} y \texttt{GameListItem}. Un usuario puede crear múltiples listas, mientras que cada lista contiene una colección ordenada de elementos. \texttt{GameListItem} vincula un videojuego con una lista determinada y permite conservar su posición y una nota opcional. La composición indica que los elementos dependen de la existencia de la lista a la que pertenecen.
+
+\section{Diagrama de Entidad-Relación}\label{sec:diagrama_er}
+
+A partir del modelo de dominio presentado en la sección anterior, se definió el esquema relacional utilizado para almacenar la información de la plataforma. Mientras que el diagrama de clases representa las entidades principales desde una perspectiva conceptual, el diagrama entidad-relación de la figura~\ref{fig:diagrama_er} muestra su implementación concreta en la base de datos, incluyendo tablas, atributos, claves primarias, claves foráneas, restricciones de unicidad y relaciones entre los registros.
+
+\begin{figure}[ht]
+	\centering
+	\PlaceholderFig{diagrama-er.png}
+	\caption{Diagrama entidad-relación de la base de datos de GameTrack.}
+	\label{fig:diagrama_er}
+\end{figure}
+
+La tabla \texttt{users} centraliza la información de las personas registradas y permite distinguir entre jugadores y desarrolladores mediante el atributo correspondiente al rol. Los datos específicos de cada jugador, como sus preferencias de género, calificaciones, reseñas y listas, se relacionan con esta tabla por medio de claves foráneas. La tabla \texttt{user\_preferences} resuelve la relación entre usuarios y géneros, permitiendo asignar un peso a cada preferencia declarada.
+
+La entidad central del catálogo es \texttt{games}, que almacena los metadatos obtenidos de las fuentes externas y los valores agregados utilizados por la plataforma, como la puntuación media, la popularidad y la cantidad de valoraciones. Los géneros y las etiquetas se normalizan en las tablas \texttt{genres} y \texttt{tags}. Debido a que un videojuego puede pertenecer a varios géneros y poseer múltiples etiquetas, estas relaciones se implementan mediante las tablas intermedias \texttt{game\_genres} y \texttt{game\_tags}. En este último caso también se conserva la cantidad de votos recibidos por cada etiqueta.
+
+Las interacciones entre jugadores y títulos se registran principalmente en \texttt{ratings}, donde se almacenan la calificación, las horas jugadas y el estado asignado al videojuego. La restricción de unicidad aplicada sobre la combinación de usuario y juego impide que un mismo jugador mantenga más de una calificación para el mismo título. Estos registros constituyen una de las principales señales utilizadas para construir el perfil del usuario y alimentar el componente colaborativo del sistema de recomendación.
+
+Las opiniones textuales se almacenan en \texttt{reviews}. Esta tabla admite tanto reseñas creadas dentro de GameTrack como reseñas importadas desde Steam, motivo por el cual la relación con un usuario interno puede ser opcional. Además del contenido original, conserva información sobre su procedencia y los resultados generales del análisis de sentimiento. Los resultados desagregados se almacenan en \texttt{review\_aspects}, donde cada registro representa un aspecto identificado en una reseña, junto con su sentimiento, puntuación, nivel de confianza y evidencia textual. La restricción de unicidad entre la reseña y el aspecto evita almacenar resultados duplicados para una misma dimensión de análisis.
+
+La organización personal del catálogo se implementa mediante \texttt{game\_lists} y \texttt{game\_list\_items}. La primera representa las listas pertenecientes a cada usuario, mientras que la segunda actúa como entidad asociativa entre una lista y los videojuegos incluidos en ella. Asimismo, permite conservar la posición de cada título y una nota opcional definida por el usuario.
+
+Finalmente, \texttt{steamspy\_sync} registra el estado de sincronización de los títulos obtenidos desde SteamSpy. Esta tabla permite controlar los intentos de incorporación, identificar registros pendientes o fallidos y conservar la respuesta original recibida. Su inclusión responde a la necesidad de distinguir entre la inexistencia de información y una falla temporal de comunicación con una fuente externa.
+
+El modelo incorpora restricciones de integridad referencial y de unicidad para evitar inconsistencias, como usuarios duplicados, múltiples calificaciones sobre un mismo juego o la repetición de un título dentro de una lista. Aunque el prototipo utiliza SQLite como motor predeterminado, el esquema fue definido mediante el mapeo objeto-relacional de la aplicación, lo que permite mantener su compatibilidad con PostgreSQL sin modificar la lógica de dominio.
+
+\section{Historias de usuario}\label{sec:historias_usuario}
+
+Los casos de uso especifican el comportamiento del sistema desde la perspectiva de su interacción con los actores. Las historias de usuario, en cambio, expresan cada necesidad desde el punto de vista de quien la tiene e incorporan el motivo que la justifica, lo que las vuelve adecuadas para verificar que cada funcionalidad responda a un beneficio identificable. La tabla~\ref{tab:historias_usuario} presenta las historias definidas, con sus criterios de aceptación y su correspondencia con los requerimientos y casos de uso.
+
+\begin{longtable}{>{\raggedright\arraybackslash}p{1cm} >{\raggedright\arraybackslash}p{4.6cm} >{\raggedright\arraybackslash}p{5.2cm} >{\raggedright\arraybackslash}p{2cm}}
+	\caption{Historias de usuario del sistema.}\label{tab:historias_usuario} \\
+	\hline
+	\textbf{ID} & \textbf{Historia} & \textbf{Criterios de aceptación} & \textbf{Trazabilidad} \\
+	\hline
+	\endfirsthead
+	\multicolumn{4}{l}{\textit{Continuación de la Tabla \ref{tab:historias_usuario}}} \\
+	\hline
+	\textbf{ID} & \textbf{Historia} & \textbf{Criterios de aceptación} & \textbf{Trazabilidad} \\
+	\hline
+	\endhead
+	\hline
+	\endfoot
+	\hline
+	\endlastfoot
+	HU-01 & Como jugador, quiero registrar los juegos que jugué junto con mi calificación y mis horas, para llevar un historial de mi actividad y que el sistema conozca mis gustos. &
+	\begin{itemize}[leftmargin=1em, itemsep=1pt, topsep=1pt]
+		\item La calificación admite valores de 1 a 5.
+		\item Es posible registrar horas jugadas y estado del título.
+		\item El registro queda asociado a mi usuario y puede modificarse.
+	\end{itemize} & RF-05 · CU-03 \\
+	HU-02 & Como jugador, quiero declarar mis géneros preferidos al crear mi cuenta, para recibir sugerencias razonables desde el primer uso. &
+	\begin{itemize}[leftmargin=1em, itemsep=1pt, topsep=1pt]
+		\item Puedo seleccionar uno o más géneros durante la incorporación.
+		\item Las preferencias declaradas influyen sobre las recomendaciones.
+		\item Puedo modificarlas posteriormente.
+	\end{itemize} & RF-07 · CU-08 \\
+	HU-03 & Como jugador, quiero recibir recomendaciones personalizadas, para descubrir títulos afines a mis gustos sin recorrer todo el catálogo. &
+	\begin{itemize}[leftmargin=1em, itemsep=1pt, topsep=1pt]
+		\item Las sugerencias excluyen los títulos que ya registré.
+		\item El resultado varía al modificarse mi historial.
+		\item Se presentan al menos tres sugerencias.
+	\end{itemize} & RF-09 · CU-08 \\
+	HU-04 & Como jugador nuevo, quiero recibir sugerencias útiles aunque todavía no haya registrado nada, para que la plataforma me sirva desde el primer momento. &
+	\begin{itemize}[leftmargin=1em, itemsep=1pt, topsep=1pt]
+		\item Sin historial, el sistema devuelve sugerencias basadas en popularidad.
+		\item El motivo indica que la sugerencia no está personalizada.
+		\item No se muestran resultados vacíos ni mensajes de error.
+	\end{itemize} & RF-10 · CU-08 \\
+	HU-05 & Como jugador, quiero saber por qué se me recomienda un título, para poder confiar en la sugerencia y decidir con criterio. &
+	\begin{itemize}[leftmargin=1em, itemsep=1pt, topsep=1pt]
+		\item Cada sugerencia se acompaña de su motivo.
+		\item El motivo refleja la estrategia efectivamente aplicada.
+		\item Si se relajó algún criterio, se declara explícitamente.
+	\end{itemize} & RF-11 · CU-08, CU-09 \\
+	HU-06 & Como jugador con poco tiempo, quiero responder unas pocas preguntas sobre mi contexto y recibir sugerencias para el momento, para no tener que elegir entre todo el catálogo. &
+	\begin{itemize}[leftmargin=1em, itemsep=1pt, topsep=1pt]
+		\item El asistente se completa en una cantidad acotada de pasos.
+		\item Las respuestas sobre compañía y tiempo actúan como filtros efectivos.
+		\item El resultado indica qué criterios se relajaron, si correspondiera.
+	\end{itemize} & RF-12 · CU-09 \\
+	HU-07 & Como jugador, quiero consultar títulos similares a uno que me gustó, para explorar el catálogo a partir de una referencia concreta. &
+	\begin{itemize}[leftmargin=1em, itemsep=1pt, topsep=1pt]
+		\item Desde la ficha de un título accedo a un listado de similares.
+		\item Los títulos listados comparten rasgos con el de referencia.
+		\item El título de referencia no aparece entre los resultados.
+	\end{itemize} & RF-13 · CU-07 \\
+	HU-08 & Como jugador, quiero organizar los juegos en listas, para separar lo que quiero jugar de lo que ya jugué y armar mis propias colecciones. &
+	\begin{itemize}[leftmargin=1em, itemsep=1pt, topsep=1pt]
+		\item Existen listas automáticas según el estado del título.
+		\item Puedo crear listas propias y agregar o quitar juegos.
+		\item Un mismo juego no se duplica dentro de una lista.
+	\end{itemize} & RF-08 · CU-05 \\
+	HU-09 & Como jugador, quiero vincular mi cuenta de Steam, para no tener que cargar manualmente los juegos que ya tengo. &
+	\begin{itemize}[leftmargin=1em, itemsep=1pt, topsep=1pt]
+		\item La vinculación incorpora la biblioteca del usuario.
+		\item Los títulos incorporados alimentan el perfil.
+		\item La vinculación puede realizarse en cualquier momento.
+	\end{itemize} & RF-14 · CU-06 \\
+	HU-10 & Como jugador, quiero ver qué opinan los demás sobre aspectos concretos de un juego, para saber si sus críticas afectan a lo que a mí me importa. &
+	\begin{itemize}[leftmargin=1em, itemsep=1pt, topsep=1pt]
+		\item La ficha muestra el sentimiento desagregado por aspecto.
+		\item Cada aspecto se acompaña de un fragmento textual de respaldo.
+		\item Los aspectos sin menciones no se presentan como neutros.
+	\end{itemize} & RF-15, RF-16 · CU-02, CU-12 \\
+	HU-11 & Como desarrollador, quiero ver la recepción de mi juego desagregada por aspecto, para saber qué corregir en lugar de solo cuántos lo recomiendan. &
+	\begin{itemize}[leftmargin=1em, itemsep=1pt, topsep=1pt]
+		\item El panel presenta la distribución de sentimiento por aspecto.
+		\item Se distingue entre aspectos bien y mal valorados.
+		\item Se informa cuando no hay datos suficientes.
+	\end{itemize} & RF-18 · CU-10 \\
+	HU-12 & Como desarrollador, quiero leer las frases concretas que sustentan cada resultado, para verificar la conclusión antes de tomar una decisión sobre el producto. &
+	\begin{itemize}[leftmargin=1em, itemsep=1pt, topsep=1pt]
+		\item Cada aspecto permite acceder a los fragmentos que lo respaldan.
+		\item Los fragmentos corresponden a reseñas reales del título.
+		\item No se presentan conclusiones sin evidencia asociada.
+	\end{itemize} & RF-19 · CU-11 \\
+\end{longtable}
+\setlength{\tabcolsep}{6pt}
+
+Las historias HU-04 y HU-05 merecen una consideración particular. La primera expresa, desde la perspectiva del usuario, el problema del arranque en frío descrito en la sección~\ref{subsec:aplicacion_perfilado}: su criterio de aceptación establece que la ausencia de historial debe producir una sugerencia degradada pero declarada, y nunca un resultado vacío. La segunda traduce la explicabilidad en una condición verificable, dado que exige que el motivo presentado refleje la estrategia efectivamente aplicada; una recomendación generada por popularidad que se presentara como personalizada satisfaría la interfaz pero incumpliría la historia.

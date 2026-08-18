@@ -1,0 +1,376 @@
+\chapter{User Research}\label{chapter:user_research}
+
+\section{Encuestas}\label{sec:encuestas}
+
+Con el objetivo de validar el problema planteado y relevar las preferencias de los potenciales usuarios de GameTrack, se realizó una encuesta que obtuvo 97 respuestas. A continuación se presentan los resultados obtenidos para cada pregunta, junto con su interpretación en relación con el diseño de la plataforma.
+
+\subsubsection*{1. ¿Con qué frecuencia jugás videojuegos?}
+
+\begin{figure}[ht]
+	\centering
+	\PlaceholderFig{encuesta-p01-frecuencia.png}
+	\caption{Frecuencia con la que los encuestados juegan videojuegos.}
+	\label{fig:enc-p01}
+\end{figure}
+
+El 50,5\% juega todos los días y el 32\% varias veces por semana. En conjunto, el 82,5\% juega con mucha frecuencia.
+
+Esto indica que la muestra está compuesta principalmente por jugadores activos, capaces de evaluar con experiencia las plataformas actuales. Para GameTrack representa un público con suficientes interacciones para generar perfiles detallados y recomendaciones progresivamente más precisas.
+
+\subsubsection*{2. ¿En qué plataforma o consola jugás principalmente?}
+
+\begin{figure}[ht]
+	\centering
+	\PlaceholderFig{encuesta-p02-plataforma.png}
+	\caption{Plataforma o consola utilizada principalmente.}
+	\label{fig:enc-p02}
+\end{figure}
+
+La PC concentra el 74,2\% de las respuestas, seguida por PlayStation con 13,4\%, Nintendo con 6,2\% y otras plataformas con porcentajes menores.
+
+Esto justifica comenzar el prototipo con una orientación hacia PC y priorizar la integración con Steam. Sin embargo, también aparece la necesidad de contemplar una futura integración multiplataforma para no limitar GameTrack exclusivamente al ecosistema de PC.
+
+\subsubsection*{3. ¿Cómo definirías tu forma de jugar?}
+
+\begin{figure}[ht]
+	\centering
+	\PlaceholderFig{encuesta-p03-forma-jugar.png}
+	\caption{Forma de jugar declarada por los encuestados.}
+	\label{fig:enc-p03}
+\end{figure}
+
+El 40,2\% se considera un jugador variado y el 39,2\% casual. Los jugadores competitivos representan el 12,4\% y los cooperativos o sociales el 8,2\%.
+
+La plataforma no debería dirigirse únicamente al público competitivo o \enquote{gamer}. La mayoría posee hábitos variados o casuales, por lo que las recomendaciones deben considerar tanto juegos multijugador como experiencias individuales, narrativas y de menor dedicación.
+
+\subsubsection*{4. ¿Cuántos años llevás jugando videojuegos aproximadamente?}
+
+\begin{figure}[ht]
+	\centering
+	\PlaceholderFig{encuesta-p04-experiencia.png}
+	\caption{Años de experiencia jugando videojuegos.}
+	\label{fig:enc-p04}
+\end{figure}
+
+El 86,6\% juega desde hace más de diez años y otro 10,3\% lo hace desde hace entre cinco y diez años.
+
+Se trata de una muestra con mucha experiencia en videojuegos. Esto fortalece la validez de sus opiniones, aunque también representa un sesgo: los resultados describen principalmente a jugadores experimentados y no necesariamente a usuarios nuevos.
+
+\subsubsection*{5. ¿Te cuesta decidir qué videojuego jugar?}
+
+\begin{figure}[ht]
+	\centering
+	\PlaceholderFig{encuesta-p05-dificultad-decidir.png}
+	\caption{Frecuencia de dificultad para decidir qué videojuego jugar.}
+	\label{fig:enc-p05}
+\end{figure}
+
+El 46,4\% respondió que le cuesta algunas veces, el 18,6\% frecuentemente y el 3,1\% muy frecuentemente. En total, al \textbf{68\% le ocurre al menos algunas veces}.
+
+El resultado valida parcialmente el problema principal de GameTrack: existe una dificultad real para decidir qué jugar, aunque no afecta de igual manera a todos. Por eso la plataforma debería ser una herramienta de apoyo y descubrimiento, no simplemente un buscador tradicional.
+
+\subsubsection*{6. ¿Cómo descubrís nuevos videojuegos actualmente?}
+
+\begin{figure}[ht]
+	\centering
+	\PlaceholderFig{encuesta-p06-descubrimiento.png}
+	\caption{Medios utilizados para descubrir nuevos videojuegos.}
+	\label{fig:enc-p06}
+\end{figure}
+
+Los medios más utilizados son:
+
+\begin{itemize}
+	\item YouTube: 70,1\%.
+	\item Tiendas digitales como Steam o Epic Games: 66\%.
+	\item TikTok, Instagram y redes sociales: 54,6\%.
+	\item Influencers y creadores: 28,9\%.
+	\item Búsquedas en Internet: 16,5\%.
+	\item Twitch: 14,4\%.
+	\item Páginas de reseñas como Metacritic: 10,3\%.
+\end{itemize}
+
+El descubrimiento se encuentra fragmentado entre tiendas, videos y redes sociales. GameTrack puede generar valor centralizando información que actualmente obliga al jugador a consultar distintas fuentes. También convendría ofrecer fichas visuales, videos, reseñas resumidas y explicaciones claras de cada recomendación.
+
+\subsubsection*{7. ¿Sentiste que las recomendaciones actuales no representan tus gustos?}
+
+\begin{figure}[ht]
+	\centering
+	\PlaceholderFig{encuesta-p07-recomendaciones-actuales.png}
+	\caption{Correspondencia de las recomendaciones actuales con los gustos personales.}
+	\label{fig:enc-p07}
+\end{figure}
+
+El 55,7\% respondió \enquote{a veces}, el 34\% \enquote{sí} y solamente el 10,3\% \enquote{no}. Por lo tanto, el \textbf{89,7\% experimentó alguna falta de precisión}.
+
+Este es uno de los resultados más importantes para la tesis. Evidencia una brecha entre las recomendaciones actuales y los gustos reales de los jugadores. GameTrack debe diferenciarse mediante un perfil más completo y recomendaciones explicables, indicando por qué determinado juego fue seleccionado.
+
+\subsubsection*{8. ¿Qué factores son importantes al elegir un videojuego?}
+
+\begin{figure}[ht]
+	\centering
+	\PlaceholderFig{encuesta-p08-factores.png}
+	\caption{Factores considerados al elegir un videojuego.}
+	\label{fig:enc-p08}
+\end{figure}
+
+Los principales factores fueron:
+
+\begin{itemize}
+	\item Gameplay: 68\%.
+	\item Género: 60,8\%.
+	\item Historia: 53,6\%.
+	\item Precio: 45,4\%.
+	\item Multijugador o cooperativo: 25,8\%.
+	\item Opiniones de otros jugadores: 22,7\%.
+	\item Dificultad: 18,6\%.
+	\item Duración: 16,5\%.
+\end{itemize}
+
+El modelo no debería basarse solamente en géneros. Debe combinar características de contenido como gameplay, historia, precio, modalidad, dificultad y duración. Esto respalda la utilización de un sistema de recomendación basado en contenido como parte del modelo híbrido.
+
+\subsubsection*{9. ¿Leés reseñas antes de jugar o comprar?}
+
+\begin{figure}[ht]
+	\centering
+	\PlaceholderFig{encuesta-p09-lectura-resenas.png}
+	\caption{Frecuencia de consulta de reseñas antes de jugar o comprar.}
+	\label{fig:enc-p09}
+\end{figure}
+
+El 38,1\% las consulta algunas veces, el 29,9\% frecuentemente y el 21,6\% siempre. Solo el 10,3\% nunca lo hace.
+
+Las reseñas influyen en la decisión de una gran parte de los jugadores. Incorporarlas permitiría mejorar tanto la experiencia de elección como el modelo de recomendación. GameTrack podría analizar calificaciones y opiniones de usuarios similares para complementar las características propias del juego.
+
+\subsubsection*{10. ¿Qué tan útiles son las recomendaciones de Steam?}
+
+\begin{figure}[ht]
+	\centering
+	\PlaceholderFig{encuesta-p10-utilidad-steam.png}
+	\caption{Utilidad percibida de las recomendaciones de Steam.}
+	\label{fig:enc-p10}
+\end{figure}
+
+El 39,2\% las considera neutras, el 37,1\% útiles y el 11,3\% muy útiles. Un 12,4\% las considera poco o nada útiles.
+
+Las recomendaciones existentes no son rechazadas, pero tampoco generan una satisfacción contundente. Esto abre una oportunidad para GameTrack, aunque también indica que no alcanza con \enquote{recomendar juegos}: el sistema debe ser transparente, preciso y permitir ajustar o rechazar recomendaciones.
+
+\subsubsection*{11. ¿Te interesan las recomendaciones basadas en tus gustos y comportamiento?}
+
+\begin{figure}[ht]
+	\centering
+	\PlaceholderFig{encuesta-p11-recom-gustos.png}
+	\caption{Interés en recomendaciones basadas en gustos y comportamiento.}
+	\label{fig:enc-p11}
+\end{figure}
+
+El 66\% respondió que sí, el 23,7\% tal vez y el 10,3\% que no. El interés potencial alcanza el \textbf{89,7\%}.
+
+Existe una aceptación elevada de la propuesta central. Además, los usuarios parecen dispuestos a permitir que su historial y comportamiento sean utilizados para personalizar resultados, siempre que se comunique claramente qué datos se emplean.
+
+\subsubsection*{12. ¿Te interesan recomendaciones basadas en jugadores similares?}
+
+\begin{figure}[ht]
+	\centering
+	\PlaceholderFig{encuesta-p12-recom-similares.png}
+	\caption{Interés en recomendaciones basadas en jugadores similares.}
+	\label{fig:enc-p12}
+\end{figure}
+
+El 64,9\% respondió que sí, el 27,8\% tal vez y solamente el 7,2\% que no.
+
+Este resultado respalda la incorporación de filtrado colaborativo. El modelo híbrido puede combinar similitud entre juegos con patrones de usuarios que hayan demostrado preferencias parecidas.
+
+\subsubsection*{13. ¿Qué información es relevante para personalizar recomendaciones?}
+
+\begin{figure}[ht]
+	\centering
+	\PlaceholderFig{encuesta-p13-info-relevante.png}
+	\caption{Información relevante para personalizar recomendaciones.}
+	\label{fig:enc-p13}
+\end{figure}
+
+Los datos más elegidos fueron:
+
+\begin{itemize}
+	\item Juegos jugados anteriormente: 75,3\%.
+	\item Géneros preferidos: 75,3\%.
+	\item Juegos favoritos: 44,3\%.
+	\item Tiempo dedicado a cada juego: 37,1\%.
+	\item Opiniones de usuarios similares: 27,8\%.
+	\item Reseñas y calificaciones propias: 24,7\%.
+\end{itemize}
+
+Esto permite definir qué información debería contener el perfil. El historial y los géneros deben tener mayor peso inicial, mientras que las horas jugadas, favoritos, reseñas y similitud con otros usuarios pueden utilizarse para refinar las recomendaciones.
+
+\subsubsection*{14. ¿Qué tan útiles serían las funciones propuestas?}
+
+\begin{figure}[ht]
+	\centering
+	\PlaceholderFig{encuesta-p14-utilidad-funciones.png}
+	\caption{Utilidad percibida de las funciones propuestas.}
+	\label{fig:enc-p14}
+\end{figure}
+
+Considerando las respuestas \enquote{útil}, \enquote{muy útil} y \enquote{necesario}:
+
+\begin{table}[ht]
+	\caption{Valoración positiva de las funciones propuestas.}
+	\label{tab:valoracion_funciones}
+	\centering
+	\begin{tabular}{l c}
+		\hline
+		\textbf{Función} & \textbf{Valoración positiva} \\
+		\hline
+		Registro de videojuegos jugados & 82,5\% \\
+		Recomendaciones personalizadas & 81,4\% \\
+		Sistema de reseñas y calificaciones & 72,2\% \\
+		Integración con Steam & 72,2\% \\
+		Recomendaciones para jugar con amigos & 71,1\% \\
+		Estadísticas personales & 62,9\% \\
+		\hline
+	\end{tabular}
+\end{table}
+
+Los resultados demuestran que GameTrack no debería depender exclusivamente de la recomendación. El registro de juegos fue incluso levemente mejor valorado. Para un producto mínimo viable conviene priorizar historial, recomendaciones personalizadas, reseñas e integración con Steam. Las estadísticas y recomendaciones grupales pueden quedar como funciones complementarias.
+
+\subsubsection*{15. ¿Utilizarías una plataforma dedicada al descubrimiento y recomendación?}
+
+\begin{figure}[ht]
+	\centering
+	\PlaceholderFig{encuesta-p15-intencion-uso.png}
+	\caption{Intención de utilizar una plataforma de descubrimiento y recomendación.}
+	\label{fig:enc-p15}
+\end{figure}
+
+El 66\% respondió que sí, el 27,8\% tal vez y solo el 6,2\% respondió que no. La aceptación potencial es del \textbf{93,8\%}.
+
+Este resultado valida el interés general por GameTrack. Sin embargo, las respuestas \enquote{tal vez} indican que la intención declarada no garantiza el uso real: la plataforma deberá demostrar rápidamente que sus recomendaciones son mejores o más prácticas que las alternativas actuales.
+
+\subsubsection*{16. ¿Qué función resulta más atractiva?}
+
+\begin{figure}[ht]
+	\centering
+	\PlaceholderFig{encuesta-p16-funcion-atractiva.png}
+	\caption{Función de la plataforma considerada más atractiva.}
+	\label{fig:enc-p16}
+\end{figure}
+
+Las recomendaciones personalizadas fueron elegidas por el 49,5\%. Luego aparecen el seguimiento de juegos con 18,6\%, las estadísticas personales con 15,5\%, las reseñas de la comunidad con 8,2\% y las recomendaciones grupales con 7,2\%.
+
+La recomendación personalizada debe funcionar como principal diferencial comercial. No obstante, el seguimiento y las estadísticas ayudan a generar recurrencia: un usuario puede entrar para registrar su actividad incluso cuando no está buscando un juego nuevo.
+
+\subsubsection*{17. ¿Los desarrolladores podrían beneficiarse de conocer a sus jugadores?}
+
+\begin{figure}[ht]
+	\centering
+	\PlaceholderFig{encuesta-p17-beneficio-desarrolladores.png}
+	\caption{Beneficio percibido para los desarrolladores.}
+	\label{fig:enc-p17}
+\end{figure}
+
+El 87,6\% respondió que sí, el 11,3\% tal vez y solo el 1\% que no.
+
+Existe una validación muy fuerte del módulo para desarrolladores. GameTrack podría proporcionar información agregada sobre perfiles, géneros preferidos, valoraciones y características compartidas por quienes disfrutan determinado juego. Es importante que estos datos sean anónimos y agregados.
+
+\subsubsection*{18. ¿Pagarías por funciones avanzadas?}
+
+\begin{figure}[ht]
+	\centering
+	\PlaceholderFig{encuesta-p18-disposicion-pago.png}
+	\caption{Disposición a pagar por funciones avanzadas.}
+	\label{fig:enc-p18}
+\end{figure}
+
+El 50,5\% respondió que no, el 34\% tal vez y únicamente el 15,5\% respondió que sí.
+
+La monetización directa al usuario presenta dificultades. El modelo más adecuado sería \textbf{freemium}: mantener gratuitas las funciones centrales y cobrar únicamente por herramientas claramente avanzadas. El módulo para desarrolladores aparece como una vía de monetización potencialmente más sólida.
+
+\subsubsection*{19. ¿Qué funcionalidad te gustaría encontrar?}
+
+\begin{figure}[ht]
+	\centering
+	\PlaceholderFig{encuesta-p19-funcionalidades-sugeridas.png}
+	\caption{Funcionalidades sugeridas por los encuestados.}
+	\label{fig:enc-p19}
+\end{figure}
+
+Entre las respuestas abiertas se repitieron las siguientes ideas:
+
+\begin{itemize}
+	\item Recomendaciones según juegos favoritos, horas jugadas y experiencias previas.
+	\item Integración con varias plataformas.
+	\item Juegos para un jugador y para grupos de amigos.
+	\item Ofertas, descuentos e historial de precios.
+	\item Listas, reseñas y seguimiento al estilo Letterboxd.
+	\item Filtros por género, duración, modalidad y precio.
+	\item Descubrimiento de juegos independientes.
+	\item Comparación entre videojuegos.
+	\item Estadísticas, logros y \enquote{platinos}.
+	\item Posibilidad de bloquear juegos o géneros.
+	\item Recomendaciones explicadas mediante mecánicas y aspectos similares.
+\end{itemize}
+
+Las respuestas confirman varias funcionalidades planificadas y agregan oportunidades interesantes. Las más coherentes con el alcance serían los filtros avanzados, recomendaciones explicables, listas personales, seguimiento de precios y soporte para juegos individuales y multijugador.
+
+\subsubsection*{Conclusión general}
+
+Los resultados validan el problema y la propuesta de GameTrack: existe interés en una plataforma que centralice el historial del jugador y genere recomendaciones más representativas. La prioridad debería ser desarrollar un sistema híbrido, explicable y alimentado por juegos anteriores, géneros, favoritos y tiempo jugado. Al mismo tiempo, los resultados muestran que GameTrack debe ofrecer valor más allá de recomendar, incorporando registro, reseñas, listas e integración con Steam. La baja disposición a pagar favorece un modelo freemium y refuerza la importancia del módulo pago para desarrolladores.
+
+\section{Análisis de las entrevistas}\label{sec:analisis_entrevistas}
+
+Con el objetivo de complementar los resultados cuantitativos de la encuesta, se realizaron tres entrevistas semiestructuradas a personas con diferentes vínculos con los videojuegos: un jugador promedio, un creador de contenido y un estudiante de desarrollo de videojuegos. Debido al tamaño reducido y al carácter exploratorio de la muestra, los resultados no pretenden ser estadísticamente representativos. Su finalidad consiste en profundizar en las motivaciones, dificultades y necesidades que intervienen en la elección de un videojuego. Las transcripciones completas se encuentran en el Anexo (véase la sección~\ref{app:entrevistas}).
+
+\subsection{Dificultad para descubrir y seleccionar videojuegos}\label{subsec:dificultad_descubrir}
+
+Las tres entrevistas muestran que la elección de un videojuego no suele producirse mediante la exploración directa y exhaustiva de una tienda digital. Los entrevistados recurren principalmente a recomendaciones de personas conocidas, creadores de contenido, valoraciones de la comunidad y videos de jugabilidad. Esto evidencia que la disponibilidad de un catálogo amplio no garantiza que los usuarios puedan identificar fácilmente los títulos adecuados para ellos.
+
+El primer entrevistado señaló que la cantidad de alternativas disponibles y el esfuerzo requerido para investigarlas constituyen obstáculos importantes. El segundo se apoya en las recomendaciones de Steam y en títulos que presentan una valoración general muy positiva. El tercero, por su parte, destacó la dificultad de encontrar un juego que responda a sus necesidades en un momento determinado. En conjunto, los testimonios respaldan el problema de sobrecarga de información planteado en la introducción y justifican la necesidad de incorporar mecanismos de filtrado y recomendación personalizada.
+
+\subsection{Importancia del contenido audiovisual}\label{subsec:importancia_audiovisual}
+
+El gameplay fue el único recurso mencionado por los tres entrevistados como determinante para evaluar un título. Los videos permiten observar las mecánicas, la dinámica y la estética real del juego, aspectos que no siempre pueden deducirse de su descripción, género o tráiler promocional. Para los entrevistados, comprobar cómo se juega resulta más útil que conocer únicamente una puntuación agregada.
+
+Este hallazgo indica que la ficha de un videojuego debería ofrecer información visual o facilitar el acceso a contenido audiovisual representativo. Sin embargo, la selección y el alojamiento de gameplays exceden el núcleo técnico del prototipo. Por lo tanto, esta necesidad puede contemplarse mediante enlaces externos o considerarse como una posible ampliación de la plataforma.
+
+\subsection{Influencia de las recomendaciones personales}\label{subsec:influencia_recomendaciones}
+
+Las recomendaciones ocupan un lugar central en las decisiones de los tres entrevistados, aunque su aceptación depende de la confianza depositada en la fuente. Las sugerencias realizadas por amigos poseen un peso elevado porque provienen de personas que conocen los gustos del usuario. De manera similar, las recomendaciones de creadores de contenido resultan relevantes cuando el jugador conoce previamente sus preferencias y puede compararlas con las propias.
+
+Los entrevistados tienden a ignorar las recomendaciones genéricas, puramente promocionales o sustentadas únicamente en la popularidad del título. Esto permite distinguir entre popularidad y pertinencia: un videojuego puede contar con una recepción favorable y, aun así, no resultar adecuado para una persona determinada. En consecuencia, el sistema no debería utilizar la popularidad como único criterio, aunque esta señal puede funcionar como mecanismo de respaldo cuando todavía no existe suficiente información sobre el usuario.
+
+\subsection{Necesidad de recomendaciones explicables}\label{subsec:necesidad_explicabilidad}
+
+Los tres participantes manifestaron interés en conocer por qué un videojuego fue seleccionado para ellos. Entre las explicaciones consideradas más útiles se encuentran la similitud con títulos jugados anteriormente, los géneros y mecánicas compartidos, la cantidad de horas dedicadas a juegos semejantes y la relación con determinados desarrolladores.
+
+La explicación aumenta la confianza en la recomendación porque permite comprobar que esta surge del perfil y del comportamiento del usuario, y no solamente de intereses comerciales o tendencias generales. Este resultado respalda la incorporación de explicaciones asociadas a cada sugerencia, por ejemplo: \enquote{Recomendado porque jugaste muchas horas a...}, \enquote{Comparte características con...} o \enquote{Coincide con tus preferencias de género}.
+
+\subsection{Contexto de juego y componente social}\label{subsec:contexto_social}
+
+Dos de las entrevistas muestran que la elección también depende del contexto actual. El primer participante destacó la importancia de saber si un título puede jugarse con amigos y si estos estarían dispuestos a adquirirlo. El tercero explicó que sus preferencias cambian según su estado de ánimo, nivel de energía y deseo de jugar de manera relajada o competitiva.
+
+Estos testimonios indican que el historial del usuario no resulta suficiente para explicar todas sus decisiones. Una misma persona puede buscar experiencias diferentes según el momento. Esto respalda la incorporación de un asistente de decisión que formule preguntas breves sobre el contexto actual, como la modalidad deseada, el tiempo disponible, el nivel de dificultad y la intención de jugar individualmente o con otras personas.
+
+La consulta de los juegos que poseen los amigos y la generación de recomendaciones grupales aparecen como posibilidades de valor, aunque requieren acceso a información adicional y una gestión más compleja de las relaciones entre usuarios. Por ese motivo, pueden considerarse extensiones futuras sin formar parte obligatoria del alcance inicial.
+
+\subsection{Información requerida antes de elegir}\label{subsec:informacion_requerida}
+
+Además del gameplay, los participantes mencionaron diferentes datos necesarios para evaluar una compra. Entre ellos se encuentran la duración aproximada, el precio, la modalidad individual o multijugador, las reseñas de otros jugadores, el desarrollador y la similitud con títulos conocidos.
+
+Las reseñas cumplen una función particularmente importante porque permiten detectar problemas que no siempre resultan visibles en el material promocional, como fallas de rendimiento, monotonía o pérdida de calidad durante etapas avanzadas. El interés por conocer rápidamente los aspectos positivos y negativos respalda el análisis automático de opiniones y su presentación de forma resumida y desagregada por aspectos.
+
+La duración también aparece como un criterio relevante, aunque no debe interpretarse de manera aislada. El segundo entrevistado explicó que un juego demasiado breve puede percibirse como una mala compra, mientras que uno excesivamente largo puede volverse repetitivo. Por lo tanto, resulta conveniente presentarla como información contextual y no como un indicador directo de calidad.
+
+\subsection{Personalización y centralización de la información}\label{subsec:personalizacion_centralizacion}
+
+Los entrevistados coincidieron en que una herramienta útil debería aprender de los juegos que efectivamente utilizan y no limitarse a observar compras, visitas o tendencias generales. Las horas jugadas, las calificaciones, las reseñas y las preferencias declaradas constituyen señales relevantes para construir el perfil.
+
+Asimismo, se valoró la posibilidad de reunir en un mismo espacio la información que actualmente se encuentra distribuida entre tiendas, redes sociales, páginas de reseñas y plataformas de video. La propuesta de valor de GameTrack no reside únicamente en recomendar títulos, sino también en reducir el esfuerzo requerido para investigar cada alternativa y permitir que el usuario comprenda rápidamente sus características principales.
+
+\subsection{Síntesis de los hallazgos}\label{subsec:sintesis_hallazgos}
+
+Las entrevistas permiten identificar cinco necesidades principales: personalización basada en el comportamiento real del jugador, explicaciones asociadas a cada recomendación, consideración del contexto actual, presentación de información relevante para la decisión y centralización de datos que actualmente se consultan en diferentes plataformas.
+
+Estos resultados son consistentes con los obtenidos en la encuesta y respaldan las funcionalidades centrales de GameTrack: el sistema híbrido de recomendación, la consulta de títulos similares, la explicación de las sugerencias, el asistente contextual, la incorporación de la biblioteca de Steam y el análisis de reseñas. Además, aportan posibles extensiones, como la integración de contenido audiovisual y las recomendaciones vinculadas con amigos, cuya implementación puede evaluarse en versiones posteriores.
+
+Debe considerarse que los tres entrevistados poseen experiencia previa con videojuegos y que dos de ellos mantienen una relación especializada con el dominio. En consecuencia, sus respuestas pueden otorgar mayor importancia a elementos como el desarrollador, las mecánicas o la comparación entre títulos que la población general. Los hallazgos deben interpretarse como evidencia cualitativa complementaria y no como una generalización aplicable a la totalidad de los jugadores.

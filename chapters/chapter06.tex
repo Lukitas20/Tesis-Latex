@@ -1,0 +1,128 @@
+\chapter{Diseño de la interfaz}\label{chapter:diseno_interfaz}
+
+El diseño de la interfaz de GameTrack responde a las dos audiencias identificadas en el capítulo de requerimientos, el jugador y el desarrollador, y traduce en decisiones concretas de interacción y visualización tanto los conceptos desarrollados en el marco teórico como las necesidades relevadas en el user research. A continuación se presentan las pantallas implementadas en el prototipo funcional, acompañadas del criterio de diseño que las fundamenta.
+
+La interfaz se construyó sobre un conjunto de tokens de diseño que centraliza la paleta, la tipografía, la escala de espaciado y los radios de las superficies. Esta decisión permite que la totalidad de la aplicación se derive de un único origen de verdad y habilita la coexistencia de un tema claro y uno oscuro sin duplicar reglas de estilo. Se emplea una sola familia tipográfica de palo seco, provista por el sistema operativo, y una escala de espaciado basada en múltiplos de cuatro píxeles, de modo que la jerarquía visual se construya mediante tamaño, peso y espacio, y no mediante la introducción de familias tipográficas adicionales.
+
+\section*{Interfaz orientada al jugador}
+\addcontentsline{toc}{section}{Interfaz orientada al jugador}
+
+\begin{figure}[ht]
+	\centering
+	\PlaceholderFig{fig-01-recomendaciones-jugador.png}
+	\caption{Pantalla principal de recomendaciones.}
+	\label{fig:ui-recomendaciones}
+\end{figure}
+
+La pantalla principal del jugador concentra la propuesta de valor central del sistema. Cada tarjeta de recomendación incorpora, además de los metadatos del título, una justificación redactada en lenguaje natural que explicita el motivo por el cual fue sugerida, por ejemplo \enquote{Se parece a The Witcher 3: Wild Hunt, que valoraste bien}. Esta decisión responde de manera directa al resultado más relevante del user research: el 89,7\% de las personas encuestadas manifestó haber experimentado alguna falta de precisión en las recomendaciones de las plataformas actuales, y la valoración de las recomendaciones de Steam se concentró en la categoría neutra, con un 39,2\%. El diagnóstico que se desprende de ambos datos no es que las recomendaciones existentes sean rechazadas, sino que resultan opacas: el usuario no dispone de ningún elemento para evaluar por qué se le sugiere un título determinado. La respuesta de diseño adoptada consiste, por lo tanto, en hacer auditable cada sugerencia.
+
+En la misma línea, el encabezado expone la estrategia de recomendación efectivamente aplicada y la cantidad de juegos valorados por el usuario, y un selector permite forzar manualmente cualquiera de las cuatro estrategias disponibles. El sistema declara con qué señal está operando en cada momento en lugar de presentarse como un mecanismo indiferenciado.
+
+Por debajo del bloque personalizado, la pantalla continúa con secciones de títulos populares, mejor valorados, lanzamientos recientes y destacados. Esta estructura materializa en la interfaz la degradación gradual del motor de recomendación descrita en el capítulo correspondiente: la pantalla nunca se presenta vacía, con independencia de cuánta información se disponga sobre el usuario.
+
+\begin{figure}[ht]
+	\centering
+	\PlaceholderFig{fig-02-comparador-estrategias.png}
+	\caption{Comparador de las cuatro estrategias de recomendación.}
+	\label{fig:ui-comparador}
+\end{figure}
+
+El comparador de estrategias constituye un instrumento de evaluación incorporado al propio producto. Presenta, para un mismo usuario y un mismo instante, las recomendaciones que produce cada una de las cuatro estrategias dispuestas en columnas paralelas, con el puntaje numérico asignado a cada título, y las complementa con una tabla que cuantifica el solape entre cada par de estrategias dentro de los primeros seis resultados.
+
+Su función es doble. En términos de diseño, sostiene el principio de explicabilidad enunciado más arriba llevándolo del nivel de la sugerencia individual al del sistema en su conjunto: el enfoque híbrido deja de ser una caja negra en la medida en que puede observarse el aporte diferencial de cada señal. En términos de evaluación, permite verificar empíricamente en qué medida cada estrategia aporta información propia. Cabe señalar que, sobre el dataset de demostración, las cuatro estrategias exhiben un grado de convergencia considerable, atribuible a que la matriz usuario-ítem del conjunto de datos presenta una densidad cercana al 33\%, muy superior a la de un sistema en producción.
+
+\begin{figure}[ht]
+	\centering
+	\PlaceholderFig{fig-04-catalogo.png}
+	\caption{Catálogo con búsqueda, filtros y ordenamiento.}
+	\label{fig:ui-catalogo}
+\end{figure}
+
+El catálogo resuelve la exploración deliberada del acervo, complementaria del descubrimiento asistido de la pantalla anterior. La arquitectura de información se organiza en tres niveles de refinamiento progresivo: la búsqueda por texto, persistente en el encabezado y disponible desde cualquier pantalla; los selectores de género y criterio de ordenamiento; y una franja de etiquetas de acceso directo. El contador de resultados acompaña cada modificación de los filtros, de modo que el efecto de cada acción resulte inmediatamente verificable. Esta pantalla atiende una de las funcionalidades más solicitadas en las respuestas abiertas de la encuesta, referida a filtros avanzados por género, duración, modalidad y precio.
+
+Cada tarjeta presenta simultáneamente la nota agregada de la comunidad y, cuando corresponde, la valoración propia del usuario, diferenciadas mediante tratamiento visual distinto. La convivencia de ambos datos permite que el catálogo opere además como registro personal, función que el user research valoró incluso por encima de la recomendación: el registro de videojuegos jugados obtuvo un 82,5\% de valoración positiva frente al 81,4\% de las recomendaciones personalizadas.
+
+\begin{figure}[ht]
+	\centering
+	\PlaceholderFig{fig-05-detalle-juego.png}
+	\caption{Ficha de un videojuego.}
+	\label{fig:ui-detalle}
+\end{figure}
+
+La ficha de un título organiza su contenido según un criterio de separación entre lo que el sistema ofrece al usuario y lo que el usuario aporta al sistema. La columna principal contiene la información descriptiva —encabezado con año, estudio, duración típica y puntaje de Metacritic, descripción y etiquetas— junto con el formulario de reseña, mientras que la columna lateral concentra los mecanismos de aporte explícito: la valoración mediante estrellas y la incorporación del título a una lista. Esta disposición busca reducir la fricción en la recolección de las señales explícitas que, según se desarrolló en el marco teórico, constituyen la base del perfilado híbrido.
+
+El texto de ayuda del campo de reseña orienta explícitamente a mencionar jugabilidad, gráficos, historia u optimización, e informa que el análisis detecta cada aspecto por separado. Se trata de una decisión deliberada de diseño, orientada a alinear la producción de texto del usuario con los cuatro aspectos que procesa el módulo de análisis. Corresponde advertir que esta guía introduce un sesgo en el corpus generado dentro de la plataforma, en tanto incrementa la probabilidad de que las reseñas aborden precisamente los aspectos que el sistema es capaz de clasificar.
+
+\begin{figure}[ht]
+	\centering
+	\PlaceholderFig{fig-07-listas.png}
+	\caption{Listas del usuario.}
+	\label{fig:ui-listas}
+\end{figure}
+
+La pantalla de listas expone una decisión de modelado que se refleja directamente en la interfaz. Las colecciones Favoritos, Jugando y Pendientes se crean automáticamente en el momento del registro y se identifican mediante una marca que las distingue como listas del sistema, mientras que el usuario puede crear listas adicionales de tema libre. Ambas se persisten en la misma entidad del modelo de datos, diferenciadas por el atributo que indica su tipo, en lugar de recurrir a estructuras separadas para cada colección predefinida. La interfaz refleja esa unidad de tratamiento presentando todas las colecciones bajo un mismo formato, y reservando la marca distintiva únicamente para señalar cuáles no pueden eliminarse.
+
+Este modelo de catalogación social retoma el esquema de plataformas como Letterboxd y Backloggd, identificadas en el estado del arte como referencia en materia de perfilado explícito y construcción de comunidad.
+
+\begin{figure}[ht]
+	\centering
+	\PlaceholderFig{fig-08-valoraciones.png}
+	\caption{Historial de valoraciones del usuario.}
+	\label{fig:ui-valoraciones}
+\end{figure}
+
+El historial de valoraciones presenta la totalidad de los títulos puntuados por el usuario, ordenados del más reciente al más antiguo. Su función en el sistema excede la del registro personal: cada elemento de esta grilla corresponde a una fila de la tabla de valoraciones, que es precisamente la estructura a partir de la cual se construye la matriz usuario-ítem sobre la que opera el filtrado colaborativo. La pantalla hace observable e inspeccionable la señal que alimenta al motor de recomendación, de modo que el usuario pueda comprender y eventualmente corregir la base sobre la cual se generan las sugerencias que recibe.
+
+\begin{figure}[ht]
+	\centering
+	\PlaceholderFig{fig-09-asistente.png}
+	\caption{Asistente de decisión, primer paso.}
+	\label{fig:ui-asistente}
+\end{figure}
+
+El asistente implementa el objetivo específico referido a asistir al usuario en la decisión sobre qué videojuego jugar según sus preferencias y contexto actual. A diferencia del motor de recomendación, que opera sobre el perfil histórico, el asistente incorpora variables situacionales mediante tres preguntas sucesivas relativas al tiempo disponible, el estado de ánimo y la compañía, que se traducen internamente en filtros sobre el catálogo. El indicador de progreso mantiene visible la extensión total del recorrido, y cada opción explicita su criterio operativo, por ejemplo el umbral de horas asociado a cada rango de tiempo disponible.
+
+Dado que la interfaz de consulta aplica una etiqueta por vez, la intersección de los tres criterios puede arrojar un conjunto insuficiente de resultados. Ante esa situación, el asistente relaja los criterios en un orden preestablecido e informa explícitamente cuál de ellos debió abandonar, en lugar de devolver un resultado vacío o presentar títulos que no satisfacen el filtro declarado. Se aplica así, en el plano de la degradación de la consulta, el mismo principio de transparencia que rige la presentación de las recomendaciones.
+
+\section*{Interfaz orientada al desarrollador}
+\addcontentsline{toc}{section}{Interfaz orientada al desarrollador}
+
+\begin{figure}[ht]
+	\centering
+	\PlaceholderFig{fig-10-panel-desarrollador.png}
+	\caption{Panel de analítica del estudio.}
+	\label{fig:ui-panel-dev}
+\end{figure}
+
+El panel de desarrollador materializa la oportunidad identificada como más diferencial en el estado del arte: la ausencia, entre los productos consolidados, de un análisis de la recepción de un título a nivel de opinión, desagregado por aspecto. Su estructura sigue una progresión de lo agregado a lo particular. Un primer nivel de indicadores sintéticos informa el sentimiento neto del estudio, el volumen de reseñas analizadas y los aspectos de mejor y peor recepción. A continuación, un gráfico presenta la recepción comparada de cada título del estudio, y finalmente el análisis basado en aspectos desagrega el resultado en las cuatro dimensiones consideradas.
+
+La representación de la polaridad se resuelve mediante una barra apilada divergente centrada en las opiniones neutras, y no mediante un gráfico de sectores. El fundamento es que el sentimiento constituye una escala ordenada, de negativo a positivo, y que centrar la categoría neutra en el origen permite comparar visualmente la extensión de cada lado entre distintos títulos, comparación que un gráfico de sectores con tres porciones de magnitud similar no habilita.
+
+El análisis por aspectos se presenta desdoblado en dos gráficos contiguos, uno de sentimiento neto y otro de volumen de menciones. La separación responde a que un valor neto elevado sostenido por unas pocas menciones no resulta comparable con el mismo valor sostenido por un volumen considerable, y presentar ambas magnitudes en una única representación induciría a confundir la intensidad de la opinión con el respaldo empírico que la sustenta.
+
+En cuanto a la codificación cromática, se adoptó una escala divergente de azul a rojo con gris en la posición neutra, y se descartó la combinación de verde y rojo por ser la de peor desempeño frente a las dicromacias más frecuentes. La paleta no fue seleccionada por criterio estético sino validada mediante una rutina que mide el contraste de cada relleno contra las superficies sobre las que se dibuja y la separación perceptual entre pares de colores en el espacio OKLab, simulando protanopia, deuteranopia y tritanopia según el modelo de Viénot, Brettel y Mollon. Adicionalmente, el color no opera en ningún caso como único portador de significado: cada gráfico incorpora leyenda, etiquetas de valor sobre las propias barras y una vista tabular equivalente desplegable.
+
+\begin{figure}[ht]
+	\centering
+	\PlaceholderFig{fig-11-dev-analisis-titulo.png}
+	\caption{Análisis de la recepción de un título individual.}
+	\label{fig:ui-analisis-titulo}
+\end{figure}
+
+El análisis de un título individual constituye la evidencia más concreta del funcionamiento del módulo de análisis basado en aspectos. Sobre el caso de Cyberpunk 2077, el sistema reporta un sentimiento neto de +1,00 en historia frente a -0,38 en optimización, resultado coherente con la recepción pública documentada del título y, por lo tanto, verificable de manera independiente. El desdoblamiento entre sentimiento y volumen de menciones señalado en el apartado anterior resulta aquí especialmente relevante, dado que el análisis se apoya en once reseñas para ese título.
+
+El elemento central de esta pantalla, sin embargo, es el bloque de evidencia textual. Cada aspecto clasificado como negativo se acompaña de los fragmentos concretos de reseña que produjeron esa clasificación, como \enquote{Crashea cada media hora y perdí progreso más de una vez}. Esta prestación se sostiene en una decisión tomada en el nivel del modelo de datos, consistente en almacenar en la entidad de aspectos de reseña el fragmento textual que justifica cada clasificación. La explicabilidad no se limita entonces a una etiqueta de polaridad, sino que alcanza a la porción de texto que la originó, y constituye el punto en el que una decisión de modelado y una decisión de interfaz convergen sobre un mismo objetivo.
+
+\section*{Temas y accesibilidad visual}
+\addcontentsline{toc}{section}{Temas y accesibilidad visual}
+
+\begin{figure}[ht]
+	\centering
+	\PlaceholderFig{fig-12-tema-oscuro.png}
+	\caption{Catálogo bajo el tema oscuro.}
+	\label{fig:ui-tema-oscuro}
+\end{figure}
+
+La aplicación admite un tema claro y uno oscuro, seleccionables por el usuario y con respeto por la preferencia declarada en el sistema operativo cuando no existe elección explícita. La comparación entre esta figura y la figura~\ref{fig:ui-catalogo}, que presenta la misma pantalla bajo el tema claro, evidencia que la totalidad de la interfaz se deriva del conjunto de tokens y no de valores cromáticos fijos dispersos en las hojas de estilo.
+
+El tema oscuro no se obtuvo por inversión de las superficies del tema claro. El gris correspondiente a la categoría neutra es deliberadamente más oscuro que su equivalente en el tema claro, y ese ajuste surgió de la validación descrita anteriormente: al conservar el mismo gris en ambos temas, la separación perceptual entre las categorías neutra y negativa descendía a un valor de 4,2 bajo simulación de protanopia, por debajo del umbral de 8 adoptado como criterio, dado que bajo esa condición el rojo se desatura hacia el gris y únicamente la luminosidad permite distinguirlos. Con el gris ajustado, el par alcanza un valor de 11,7. El caso ilustra el procedimiento seguido en el diseño visual del sistema, en el que las decisiones cromáticas se verificaron mediante medición antes de su adopción.

@@ -1,0 +1,19 @@
+\renewcommand{\appendixname}{Anexo}
+\renewcommand{\thechapter}{\Alph{chapter}}
+
+% Comando para iniciar la sección de anexos en el índice
+\newcommand{\initappendix}{%
+  \addcontentsline{toc}{chapter}{Anexo}%
+}
+
+% Comando para cada anexo individual
+\newcommand{\anexo}[1]{%
+  \refstepcounter{chapter}%
+  \chapter*{Anexo \thechapter: #1}%
+  \addcontentsline{toc}{section}{Anexo \thechapter: #1}%
+  \markboth{Anexo \thechapter: #1}{}%
+}
+
+\initappendix
+
+\input{chapters/appendix/interviews.tex} % Transcripción de las entrevistas del user research (sección 4.2)

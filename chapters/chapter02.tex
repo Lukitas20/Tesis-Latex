@@ -1,0 +1,322 @@
+\chapter{Marco Teórico}\label{chapter:marco_teorico}
+
+\section{Sistemas de Recomendación}\label{sec:sistemas_recomendacion}
+
+Los sistemas de recomendación son herramientas dentro del campo de la minería de datos que ayudan a proporcionar sugerencias tanto a usuarios como a grupos de estos sobre un producto o elemento que podría ser de su interés. Estos sistemas ayudan a manejar la carga excesiva de información que tenemos en internet hoy en día, filtrando y priorizando datos relevantes según los gustos o preferencias de los usuarios. Esto facilita que los usuarios sean dirigidos a opciones que coincidan con sus intereses, permitiendo crear no solo estrategias de marketing sino también una fidelización de clientes en base a las preferencias de estos mismos \parencite{ShahEtAl2016}.
+
+Estos mismos surgieron por la imperiosa necesidad de manejar la sobrecarga de información, donde la infinita cantidad de opciones que se nos presenta puede hasta ser abrumadora para los usuarios. Debido a esta abundancia de datos, se volvió completamente necesario contar con métodos de filtrado de información que les transmitan a los usuarios cierto contenido de manera eficiente. Esto ayuda a evitar que los usuarios enfrenten una inmensa cantidad de opciones sin ningún tipo de guía, evitando así que estos mismos frustren su posible elección por el gigantesco \enquote{mar} de posibilidades \parencite{KoEtAl2022}.
+
+Podría decirse que los sistemas de recomendación actúan como un clásico asistente de usuarios para que estos no pierdan elementos que podrían pasar desapercibidos ante el gran volumen de opciones. Este \enquote{asistente} se ajusta a las necesidades o gustos individuales, ayudando a mejorar la satisfacción del usuario y entregando de manera sencilla la información que este individuo busca.
+
+Estos mismos enfrentan desafíos iniciales como la falta de información, ya que, al tener un usuario nuevo, este carece de datos útiles para analizar (problema del usuario nuevo) o también problemas al recomendar ítems si el usuario no tiene un historial de calificaciones (problema del primer votante). Sin embargo, todo esto puede ser resuelto con estrategias como filtrado colaborativo, contenido basado o diferentes tipos de enfoques que veremos a continuación \parencite{ShahEtAl2016}.
+
+Para entrar más en detalle sobre estos sistemas, es necesario aclarar que tenemos tres tipos principales de sistemas de recomendación, los cuales se diferencian en base a la técnica que utilizan para generar el filtrado y las recomendaciones: Filtrado basado en contenido, Filtrado colaborativo y Enfoque híbrido \parencite{KoEtAl2022}.
+
+\subsection{Filtrado Basado en Contenido}\label{subsec:filtrado_contenido}
+
+El primero de estos es el Filtrado basado en contenido (\emph{Content-Based Filtering}), el cual recomienda ítems similares a los que el usuario había calificado positivamente en el pasado. Este se basa únicamente en la información del usuario individual y las características de los elementos que a este le gustaron, sin utilizar ningún tipo de información sobre demás usuarios. Usa técnicas como TF-IDF, la cual es una técnica utilizada para medir la importancia de una palabra dentro de un conjunto de documentos, otorgando un mayor peso a aquellas que aparecen con frecuencia en los elementos recomendados. También emplea Naïve Bayes, un algoritmo probabilístico basado en el Teorema de Bayes que permite clasificar elementos según la probabilidad de pertenecer o no a una determinada categoría, además de técnicas de procesamiento de texto para la creación de perfiles de usuario. Como ventaja, este no sufre del problema del primer votante, el cual fue previamente explicado. Pero, como desventaja, sufre de un problema conocido como \emph{overspecialization}, el cual refiere al peligro de hacer recomendaciones demasiado específicas, limitando demasiado la diversidad de opciones \parencite{ShahEtAl2016, KoEtAl2022}.
+
+\subsection{Filtrado Colaborativo}\label{subsec:filtrado_colaborativo}
+
+Como segundo modelo tenemos el Filtrado colaborativo (\emph{Collaborative Filtering}). Este sistema recomienda ítems basados en gustos o preferencias de usuarios afines o similares entre sí. Utiliza datos de calificación e interacción de muchos usuarios con un perfil parecido para predecir cuáles podrían ser tus preferencias. Este se divide en Filtrado colaborativo basado en memoria (\emph{Memory-Based}), el cual calcula similitudes entre usuarios en tiempo real aplicando técnicas de minería de información como KNN (\emph{K-Nearest Neighbors} o vecinos más cercanos), utilizado para identificar usuarios cuyos comportamientos sean similares y, a partir de ellos, predecir cuáles podrían ser las preferencias de un nuevo usuario. También se divide en Filtrado colaborativo basado en modelo (\emph{Model-Based}), el cual utiliza modelos estadísticos de aprendizaje automático, como la factorización matricial, para generar recomendaciones. Como ventaja, este modelo tiene la capacidad de distribuir intereses basados en patrones colectivos, pero como desventaja tiene no solo el problema del usuario nuevo y el problema del primer votante, sino que también sufre de escasez o dispersión de datos y de la tendencia de recomendar únicamente elementos populares y no realmente elementos útiles para el usuario \parencite{ShahEtAl2016, KoEtAl2022}.
+
+\subsection{Enfoque Híbrido}\label{subsec:enfoque_hibrido}
+
+Por último, tenemos el Enfoque híbrido (\emph{Hybrid Approach}), que combina la técnica de filtrado basado en contenido y colaborativo para superar, mediante la fusión de ambos, las limitaciones de cada uno en particular. Esta combinación de modelos puede hacerse de distintas formas, como la combinación de predicciones de ambos métodos (\emph{Weighted Hybridization}), elegir el mejor método dependiendo de la situación (\emph{Switching Hybridization}), mezclar los resultados de ambos métodos simultáneamente (\emph{Mixed Hybridization}), usar la salida de un método como la entrada del otro (\emph{Feature Augmentation} y \emph{Meta-Level}) o refinar la selección y recomendación de un método con el otro (\emph{Cascade Hybridization}). Todas estas estrategias permiten mejorar la precisión, la diversidad y minimizar los problemas anteriormente nombrados lo más posible \parencite{ShahEtAl2016, KoEtAl2022}.
+
+\section{Perfilado de Usuarios}\label{sec:perfilado_usuarios}
+
+\subsection{Definición de perfil de usuario}\label{subsec:definicion_perfil}
+
+Un perfil de usuario es un conjunto de información que describe las características, intereses, comportamientos y preferencias de un individuo. Este perfil permite capturar datos relevantes sobre el usuario con el fin de representar sus gustos y posibles elecciones dentro de sistemas personalizados y adaptativos. Un perfil de usuario puede incluir desde datos demográficos, como nombre, edad o país de residencia, hasta información relacionada con sus intereses, como categorías de productos favoritas, así como historiales de actividad, por ejemplo páginas visitadas o anuncios con los que ha interactuado. También puede contemplar rasgos de comportamiento, tales como patrones de uso y tendencias de navegación. La combinación de estos datos permite construir un modelo que represente de manera precisa las características del usuario, facilitando la personalización de servicios y la generación de recomendaciones más adecuadas a sus preferencias \parencite{EkeEtAl2019}.
+
+La importancia de la creación y utilización del perfilado de usuarios radica en su capacidad para mejorar la personalización y adaptación de productos, recomendaciones y experiencias en función de las preferencias de cada individuo, lo que suele traducirse en mayores niveles de satisfacción y fidelización. Los perfiles precisos ayudan a predecir necesidades e intereses futuros, permitiendo a las organizaciones ofrecer soluciones más relevantes y oportunas. Además, el perfilado de usuarios cumple un papel fundamental en la optimización de estrategias comerciales, ya que la segmentación efectiva de audiencias facilita el desarrollo de campañas específicas, aumentando su efectividad y reduciendo costos asociados \parencite{KanojeEtAl2014}.
+
+Al comprender los gustos y comportamientos previos de los usuarios, los sistemas pueden anticipar posibles elecciones futuras. Por este motivo, los perfiles deben actualizarse de manera continua, permitiendo que la personalización evolucione junto con los intereses y necesidades actuales de cada individuo. Esto contribuye a mantener la relevancia de las recomendaciones a lo largo del tiempo y favorece la construcción de perfiles dinámicos capaces de adaptarse a los cambios de comportamiento del usuario \parencite{EkeEtAl2019}. Debido a estos beneficios, el perfilado de usuarios se ha convertido en un componente ampliamente utilizado en los servicios digitales modernos orientados a la personalización de experiencias.
+
+\subsection{Enfoques de Perfilado de Usuario}\label{subsec:enfoques_perfilado}
+
+Los principales enfoques de perfilado de usuario que se han desarrollado para mejorar la personalización en sistemas de recomendación son los siguientes: Perfil Explícito (\emph{Explicit User Profiling}), Perfil Implícito (\emph{Implicit User Profiling}) y Perfil Híbrido (\emph{Hybrid User Profiling}) \parencite{KanojeEtAl2014}.
+
+En primer lugar, el Perfil Explícito (\emph{Explicit User Profiling}) consiste en obtener información directamente de los usuarios, generalmente a través de sistemas de registro, formularios, encuestas o preguntas directas. Este método es bastante preciso, ya que la información proviene directamente del usuario. Sin embargo, presenta la desventaja de que los usuarios no siempre están dispuestos a proporcionar todos los datos que la plataforma podría necesitar y, en caso de estarlo, el proceso puede resultar tedioso o demandar demasiado tiempo \parencite{EkeEtAl2019}.
+
+En segundo lugar, tenemos el Perfil Implícito (\emph{Implicit User Profiling}), el cual consiste en recopilar información mediante el análisis del comportamiento y las acciones que el usuario realiza dentro de una plataforma, como clics, tiempo de permanencia en una página, movimientos del mouse, entre otros. Este enfoque también es conocido como perfilado comportamental o adaptativo, ya que no solo analiza los gustos del usuario, sino también la forma en la que este interactúa con el sistema. Su principal ventaja es que resulta menos intrusivo y permite obtener información que el usuario normalmente no proporciona de forma directa \parencite{KanojeEtAl2014}.
+
+Por último, tenemos el Perfil Híbrido (\emph{Hybrid User Profiling}), el cual combina las ventajas de ambos enfoques previos, integrando características estáticas, como datos demográficos o información proporcionada por el usuario que no suele cambiar frecuentemente, junto con datos comportamentales obtenidos en tiempo real. Esto permite no solo una mayor precisión, sino también la posibilidad de actualizar constantemente el perfil del usuario para reflejar cambios en sus gustos y preferencias. Como resultado, es posible adaptar mejor las recomendaciones y mejorar la eficiencia general del sistema de recomendación \parencite{KanojeEtAl2014}.
+
+\subsection{Construcción y Actualización de Perfiles}\label{subsec:construccion_perfiles}
+
+La construcción de un perfil de usuario se realiza a través de diferentes procesos que involucran tanto métodos explícitos como implícitos, sumados a técnicas de aprendizaje y análisis de comportamiento \parencite{EkeEtAl2019}.
+
+Durante este proceso se recopilan datos mediante técnicas de recolección activa (información que el usuario proporciona manualmente) o pasiva (información obtenida a partir del monitoreo de su actividad), con el objetivo de extraer características relevantes como intereses, preferencias y patrones de comportamiento. A partir de estos datos, se construye un modelo que representa al usuario y sus características principales \parencite{EkeEtAl2019}.
+
+Para determinar qué atributos o intereses son significativos dentro del perfil, pueden utilizarse diferentes técnicas de análisis y aprendizaje automático. Entre ellas se encuentran los \emph{Support Vector Machines} (SVM), algoritmos de aprendizaje supervisado utilizados principalmente para tareas de clasificación, cuyo objetivo es encontrar una frontera óptima que permita diferenciar distintos grupos de datos. Además, también pueden emplearse modelos de aprendizaje automático y técnicas de filtrado de contenido para identificar patrones relevantes y mejorar la representación del usuario \parencite{KanojeEtAl2014}.
+
+Luego, el desafío se encuentra en lograr combinar esta información proveniente de distintas fuentes y técnicas para formar una representación coherente del perfil de usuario. En este proceso pueden aparecer problemas como la duplicación de datos o ambigüedades en la información recopilada, las cuales deben ser corregidas si se busca obtener un perfil de usuario preciso y consistente \parencite{KanojeEtAl2014}.
+
+Para realizar un perfilado útil no solo basta con crear el perfil, sino que además es necesario mantenerlo actualizado casi en tiempo real. Los usuarios no siempre conservan los mismos gustos, intereses y comportamientos a lo largo del tiempo, por lo que el perfil debe permanecer abierto a actualizaciones, modificaciones y cambios que permitan reflejar sus preferencias actuales \parencite{EkeEtAl2019}.
+
+Para lograr esto, se realizan actualizaciones periódicas o en respuesta a nuevas interacciones, modificando o ampliando el perfil existente para incorporar nueva información. De esta manera, se asegura que el perfil refleje de forma precisa el estado actual del usuario. El sistema monitorea continuamente la actividad y ajusta el perfil sin necesidad de intervención directa por parte del usuario, utilizando técnicas de aprendizaje y análisis de comportamiento. Entre los métodos más utilizados para este propósito se encuentran el filtrado colaborativo, el análisis de tendencias y los modelos de predicción, los cuales permiten determinar cuándo y cómo los atributos de un perfil deben ser actualizados \parencite{EkeEtAl2019}.
+
+\subsection{Aplicación del Perfilado en Sistemas de Recomendación}\label{subsec:aplicacion_perfilado}
+
+Un sistema de recomendación necesita un perfil de usuario, ya que este actúa como una representación de las preferencias e intereses de cada individuo, permitiendo que el sistema filtre la inmensa cantidad de información disponible y encuentre contenido realmente relevante para él. Una representación precisa del usuario resulta fundamental para mejorar la calidad de los resultados obtenidos y el nivel de personalización ofrecido por el sistema \parencite{EkeEtAl2019}.
+
+Los usuarios suelen tener dificultades para expresar explícitamente qué es lo que buscan mediante palabras clave o búsquedas tradicionales. Por este motivo, los perfiles permiten identificar intereses a partir del comportamiento observado y generar una retroalimentación continua sobre las preferencias del usuario. Gracias a esta información, el sistema puede comprender mejor sus gustos y ofrecer recomendaciones más precisas y personalizadas \parencite{MiddletonEtAl2004}.
+
+En algunos enfoques más avanzados, como los ontológicos, el perfil permite inferir intereses generales a partir de temas específicos consultados por el usuario, estableciendo relaciones entre conceptos y categorías. De esta manera, es posible construir una representación más completa de sus intereses, obteniendo información que difícilmente podría capturarse únicamente mediante la observación directa o las preferencias declaradas \parencite{MiddletonEtAl2004}.
+
+El perfilado de usuarios es el componente esencial que permite a los diferentes enfoques de recomendación filtrar la información y ofrecer resultados relevantes. Lógicamente, su contribución varía dependiendo del enfoque utilizado.
+
+En los sistemas basados en contenido, el perfilado permite realizar una correlación directa entre las preferencias y comportamientos previos del usuario y los nuevos elementos a recomendar. Por otro lado, en el enfoque colaborativo, el perfil constituye la base para analizar y calcular la similitud entre usuarios mediante algoritmos como el coeficiente de correlación de Pearson (Pearson-r), una medida estadística utilizada para cuantificar el grado de relación entre dos conjuntos de datos. De esta forma, es posible identificar usuarios con gustos similares y utilizar dicha información para generar recomendaciones \parencite{MiddletonEtAl2004}.
+
+Por último, en los enfoques híbridos, los perfiles se utilizan para combinar las ventajas de los sistemas basados en contenido y colaborativos, reduciendo las limitaciones propias de cada uno. Entre estas limitaciones se encuentra el problema conocido como \emph{Cold Start}, donde la falta de información dificulta la generación de recomendaciones precisas para nuevos usuarios. El perfilado permite mitigar este problema mediante una carga inicial de información obtenida explícita o implícitamente, posibilitando que el sistema genere recomendaciones útiles incluso en las primeras etapas de utilización \parencite{MiddletonEtAl2004}.
+
+\section{Inteligencia Artificial, Machine Learning y Deep Learning}\label{sec:ia_ml_dl}
+
+\subsection{IA, ML y Deep Learning}\label{subsec:ia_ml_dl_definicion}
+
+La IA se define fundamentalmente como un programa capaz de razonar, percibir, actuar y adaptarse \parencite{GandhiGandhi2022}. Se la puede describir como una disciplina inclusiva y amplia que proporciona una gran variedad de métodos para lograr que las máquinas sean inteligentes, basándose en la forma en que la mente humana evalúa el conocimiento \parencite{GandhiGandhi2022}.
+
+El ML se define como un paradigma en el que, sin interacción humana, un programa informático puede aprender y adaptarse a nuevos hechos \parencite{GandhiGandhi2022}. Es una rama específica de la IA que utiliza enfoques de aprendizaje estadístico para crear sistemas inteligentes que aprenden y evolucionan por sí mismos, sin necesidad de ser programados intencionalmente para una tarea específica \parencite{GandhiGandhi2022}. Utiliza modelos algorítmicos para \enquote{entrenarse} a partir del contexto de los datos ingresados y encontrar variables o patrones por cuenta propia \parencite{GandhiGandhi2022}.
+
+El DL es definido de forma estricta como un subconjunto del machine learning que se utiliza para abordar problemas complejos y construir soluciones inteligentes \parencite{GandhiGandhi2022}. Se diferencia en que emplea múltiples capas (redes neuronales) para representar distintos grados de abstracción de los datos, imitando la manera en que el intelecto humano admite e investiga información heterogénea y comprende estructuras analíticas avanzadas de forma subconsciente \parencite{GandhiGandhi2022}.
+
+Estas tres tecnologías operan de forma interconectada y anidada, similar a la estructura de una \enquote{muñeca rusa} o círculos concéntricos \parencite{GandhiGandhi2022}. El Deep Learning está anidado dentro del Machine Learning, ya que constituye un subconjunto (\emph{subset}) directo de este y se perfila como la tecnología líder en el campo, mientras que el Machine Learning, a su vez, se clasifica formalmente como una rama (\emph{branch}) dependiente del campo más general de la Inteligencia Artificial \parencite{GandhiGandhi2022}.
+
+\subsection{Paradigmas de aprendizaje}\label{subsec:paradigmas_aprendizaje}
+
+El Aprendizaje Supervisado utiliza datos de entrenamiento que consisten en ejemplos o vectores de entrada emparejados directamente con sus correspondientes valores de salida deseados o etiquetas \parencite{GandhiGandhi2022, VerbrakkenEtAl2020}.
+
+El objetivo principal de este algoritmo es examinar estos pares de datos para inferir o encontrar una función matemática que logre mapear las entradas con la salida deseada \parencite{GandhiGandhi2022, VerbrakkenEtAl2020}. Una vez que el modelo se entrena (intentando minimizar los errores de sesgo y de varianza en el proceso), la función resultante se utiliza para clasificar o predecir resultados de manera confiable cuando se introducen datos nuevos que el sistema no ha visto previamente \parencite{GandhiGandhi2022, VerbrakkenEtAl2020}.
+
+El Aprendizaje No Supervisado se caracteriza por utilizar datos de entrada que no poseen valores de salida, etiquetas, ni han sido clasificados o puntuados previamente \parencite{GandhiGandhi2022, VerbrakkenEtAl2020}.
+
+Dado que la información carece de evaluación previa y, por tanto, de una métrica clara de precisión, el propósito del algoritmo es identificar por sí mismo la estructura, describir los patrones naturales ocultos y encontrar tendencias dentro del conjunto de datos \parencite{GandhiGandhi2022, VerbrakkenEtAl2020}. Los casos de uso más comunes son el agrupamiento o \emph{clustering} (agrupar puntos de datos basándose en características de similitud) y la reducción de dimensionalidad o análisis de componentes principales (determinar las características clave más útiles para distinguir muestras y descartar el resto) \parencite{GandhiGandhi2022, VerbrakkenEtAl2020}.
+
+\subsection{Representación de datos y características}\label{subsec:representacion_datos}
+
+Las características son los datos individuales que describen las propiedades de un punto de datos o muestra \parencite{BadilloEtAl2020}.
+
+Estas características pueden ser categóricas (valores predefinidos sin un orden particular, como \enquote{hombre/mujer}), ordinales (valores con un orden intrínseco) o numéricas (valores reales o cuantitativos) \parencite{BadilloEtAl2020}.
+
+Muchas veces, los datos crudos deben transformarse matemáticamente (por ejemplo, aplicando logaritmos o calculando proporciones). Al proceso de utilizar el conocimiento experto para idear o transformar características relevantes se le conoce como ingeniería de características \parencite{BadilloEtAl2020}.
+
+Una de las técnicas más utilizadas para representar texto como vectores numéricos es TF-IDF (\emph{Term Frequency--Inverse Document Frequency}), una medida estadística que pondera la importancia de cada término dentro de un documento respecto del conjunto total de documentos o corpus \parencite{AlObaydyEtAl2022}. Se compone de dos factores. La frecuencia de término (TF) mide cuántas veces aparece un término $t$ en un documento $d$: cuanto mayor es, más relevante se considera ese término dentro del documento. La frecuencia inversa de documento (IDF) mide qué tan poco común es el término en el corpus, y se calcula como el logaritmo del número total de documentos dividido por la cantidad de documentos que lo contienen:
+
+\begin{equation}\label{eq:idf}
+    \text{IDF}(t) = \log\left(\frac{N}{n_t}\right)
+\end{equation}
+
+\noindent donde $N$ es el total de documentos y $n_t$ la cantidad de documentos que contienen el término $t$. El peso final es el producto de ambos factores:
+
+\begin{equation}\label{eq:tfidf}
+    \text{TF-IDF}(t, d) = \text{TF}(t, d) \times \text{IDF}(t)
+\end{equation}
+
+De este modo, el peso resulta alto cuando un término aparece con frecuencia en un documento pero es poco común en el resto del corpus, es decir, cuando es descriptivo y discriminante, y bajo cuando el término es frecuente en todos los documentos y, por lo tanto, poco distintivo \parencite{AlObaydyEtAl2022}. Cada documento queda así representado como un vector en un espacio donde cada dimensión corresponde a un término del vocabulario.
+
+En el presente trabajo, TF-IDF se aplica sobre los atributos textuales de cada videojuego, géneros, etiquetas, desarrollador y descripción, generando para cada título un vector de características que lo representa. Estos vectores son los que posteriormente se comparan mediante la similitud del coseno para identificar juegos afines en el filtrado basado en contenido.
+
+Existen también enfoques alternativos de representación de texto basados en redes neuronales, como los \emph{word embeddings}, que representan las palabras mediante vectores densos capaces de capturar relaciones semánticas, y su uso junto a arquitecturas como las redes neuronales recurrentes (RNN) y las LSTM. Estos métodos son más complejos y están orientados a otras tareas, por lo que no se emplean en el presente trabajo \parencite{GandhiGandhi2022}.
+
+\subsection{Medidas de similitud}\label{subsec:medidas_similitud}
+
+Una medida de similitud es una métrica matemática que se utiliza para cuantificar qué tan parecidas, cercanas o relacionadas están dos observaciones o puntos de datos entre sí dentro de un \enquote{espacio de características}. En términos prácticos, es la fórmula que le permite a la computadora calcular numéricamente la diferencia o proximidad entre los atributos de dos elementos evaluados \parencite{CorreaHenao2021}.
+
+La distancia Euclidiana es la medida de distancia ordinaria entre dos puntos y se considera la más sencilla \parencite{CorreaHenao2021}. En el aprendizaje automático, se utiliza por defecto para calcular la distancia entre vectores de características numéricas \parencite{BadilloEtAl2020}. Se calcula matemáticamente a través del teorema de Pitágoras, obteniendo la raíz cuadrada de la suma de las diferencias al cuadrado entre los valores de los puntos \parencite{BadilloEtAl2020, CorreaHenao2021}.
+
+El índice de Jaccard es una métrica utilizada específicamente para determinar la similitud entre observaciones de tipo binario \parencite{CorreaHenao2021}. Su gran ventaja es que ignora las coincidencias donde un atributo está ausente en ambas partes, contando como similitud únicamente cuando el atributo está presente en los dos elementos evaluados \parencite{CorreaHenao2021}. Por ejemplo, si se compara a dos personas basándose en los productos que compraron en una tienda, la distancia de Jaccard es la mejor opción porque solo cuenta como coincidencia los productos que ambos efectivamente adquirieron, ignorando la enorme cantidad de productos disponibles que ninguno de los dos llevó \parencite{CorreaHenao2021}.
+
+La similitud del coseno mide el coseno del ángulo formado entre dos vectores en el espacio de características. A diferencia de la distancia euclidiana, no depende de la magnitud de los vectores sino únicamente de su orientación: dos elementos se consideran similares si \enquote{apuntan} en la misma dirección, independientemente de su tamaño. Toma valores entre 0 (vectores ortogonales, sin similitud) y 1 (misma dirección). Esta propiedad la hace especialmente adecuada para datos dispersos y de alta dimensión, como los vectores TF-IDF de texto o las matrices de calificaciones de usuarios, donde la mayoría de las dimensiones valen cero. En el presente trabajo se utiliza tanto para comparar los vectores de características de los videojuegos (filtrado basado en contenido) como los vectores de calificaciones entre usuarios (filtrado colaborativo) \parencite{CorreaHenao2021, KoEtAl2022}.
+
+La correlación de Pearson es otra medida frecuente en el filtrado colaborativo. A diferencia del coseno, centra los datos restando la media de cada usuario, lo que corrige las diferencias en la forma en que cada persona utiliza la escala de calificación, por ejemplo usuarios que tienden a puntuar siempre alto o siempre bajo \parencite{KoEtAl2022}.
+
+\subsection{Procesamiento de Lenguaje Natural (NLP)}\label{subsec:nlp}
+
+El procesamiento de lenguaje natural (NLP) es el campo de la inteligencia artificial que se ocupa de que las máquinas puedan procesar, interpretar y analizar el lenguaje humano. En el presente trabajo resulta relevante porque buena parte de la información de los videojuegos y de los usuarios se encuentra en forma de texto: descripciones, etiquetas y reseñas.
+
+El preprocesamiento de texto es un paso previo necesario para transformar el texto en bruto en una forma analizable por los algoritmos. Sus tareas principales son la tokenización, que divide el texto en unidades menores llamadas \emph{tokens} (habitualmente palabras); el filtrado o eliminación de \emph{stop-words}, que descarta palabras muy frecuentes pero poco informativas, artículos, preposiciones y similares, para reducir el ruido y la dimensionalidad; y el \emph{stemming} y la lematización, que reducen las distintas formas de una palabra a una representación común (su raíz o su lema), de manera que las variantes morfológicas se traten como un mismo término \parencite{AlObaydyEtAl2022, LabdEtAl2024}.
+
+En el presente trabajo, estas tareas se aplican sobre los campos textuales de cada videojuego, principalmente la descripción y las etiquetas, antes de su vectorización. Una vez preprocesado, el texto se transforma en vectores numéricos mediante TF-IDF, técnica descrita en la sección~\ref{subsec:representacion_datos}.
+
+El análisis de sentimiento (o minería de opiniones) es la tarea del NLP que estudia computacionalmente las opiniones, sentimientos y emociones expresados en un texto, con el objetivo de clasificar su polaridad como positiva, negativa o neutra \parencite{MedhatEtAl2014}. Puede realizarse a nivel de documento, de oración o de aspecto; este último permite identificar la opinión sobre características específicas de una entidad, por ejemplo, los gráficos, la jugabilidad o la historia de un videojuego, y las reseñas de productos constituyen una de sus principales fuentes de datos, ya que permiten tomar decisiones a partir del análisis de las opiniones de los usuarios \parencite{MedhatEtAl2014}.
+
+En el presente trabajo, esta técnica resulta especialmente relevante para el módulo de análisis orientado a desarrolladores, donde posibilita interpretar de forma automática las opiniones de los jugadores sobre cada título a partir de sus reseñas, más allá de la calificación numérica.
+
+\subsection{Entrenamiento y evaluación de modelos}\label{subsec:entrenamiento_evaluacion}
+
+Para que un modelo de aprendizaje automático resulte útil, primero debe entrenarse y luego evaluarse. Durante el entrenamiento se estiman los parámetros del modelo a partir de los datos, minimizando una función de costo que mide el error entre sus predicciones y los valores reales, para lo cual se emplean algoritmos de optimización como el descenso de gradiente \parencite{BadilloEtAl2020}.
+
+En este proceso se busca un equilibrio entre el sesgo y la varianza, evitando tanto el subajuste (un modelo demasiado simple que no captura los patrones) como el sobreajuste (un modelo que memoriza el ruido de los datos de entrenamiento y falla al generalizar a datos nuevos) \parencite{BadilloEtAl2020}.
+
+Para evaluar el modelo sin que el sobreajuste sesgue los resultados, los datos se dividen en subconjuntos de entrenamiento, validación y prueba, reservando este último para medir el desempeño sobre datos no vistos. Cuando el conjunto disponible es pequeño, se recurre a la validación cruzada de K iteraciones (\emph{K-fold}), que rota el subconjunto de prueba a lo largo de varias rondas y promedia los resultados para confirmar la robustez del modelo \parencite{BadilloEtAl2020}.
+
+La efectividad se mide con métricas que dependen del tipo de problema: para clasificación se utilizan la exactitud, la precisión y la sensibilidad derivadas de la matriz de confusión, y para regresión, métricas de error como el error cuadrático medio \parencite{BadilloEtAl2020}. En el caso específico de los sistemas de recomendación, además se emplean métricas orientadas a la calidad del ranking de ítems: la precisión y la exhaustividad sobre los primeros $k$ resultados (\emph{precision@k} y \emph{recall@k}), que miden cuántos de los ítems recomendados son relevantes, y métricas sensibles al orden como MAP (\emph{Mean Average Precision}) y NDCG (\emph{Normalized Discounted Cumulative Gain}), que premian que los ítems más relevantes aparezcan en las primeras posiciones. Cuando el sistema predice calificaciones numéricas, se utilizan el error absoluto medio (MAE) y la raíz del error cuadrático medio (RMSE) \parencite{KoEtAl2022}.
+
+\section{Procesamiento y Análisis de Reseñas}\label{sec:procesamiento_resenas}
+
+\subsection{Las reseñas como fuente de datos en la Minería de Opiniones}\label{subsec:resenas_fuente_datos}
+
+Con el crecimiento expansivo de la web y la explosión de las redes sociales, Internet se ha convertido en un mercado gigantesco donde las personas publican libremente sus puntos de vista sobre diversos productos y servicios, tales como películas, libros u hoteles \parencite{AliEtAl2016}. Actualmente, las opiniones y reseñas se pueden encontrar en casi todas partes, incluyendo blogs, redes sociales, portales de noticias y sitios de comercio electrónico \parencite{KimEtAl2010}.
+
+El descubrimiento y la comprensión de estas opiniones a partir del contenido generado por los usuarios en línea es crucial para múltiples aplicaciones en el mundo real \parencite{ZhangEtAl2022}. Por un lado, los nuevos consumidores consultan constantemente las reseñas de otras personas para tomar decisiones informadas (por ejemplo, elegir un hotel o ver una película) frente a la confusión que puede generar la abundancia de opciones \parencite{AliEtAl2016}. Por otro lado, para las empresas que operan en plataformas de comercio electrónico, el análisis de los sentimientos y opiniones de los clientes a partir de las reseñas ayuda a mejorar significativamente el producto o servicio y a diseñar mejores campañas de marketing \parencite{ZhangEtAl2022}.
+
+A pesar de su inmenso valor, el uso de las reseñas como fuente de datos presenta desafíos técnicos formidables debido a su volumen masivo y su complejidad estructural \parencite{KimEtAl2010}. La disponibilidad de estas reseñas es tan abrumadora que resulta difícil para los usuarios digerir la información; por ejemplo, un solo producto puede llegar a tener cientos de reseñas provenientes de docenas de fuentes distintas \parencite{KimEtAl2010}. Dada esta enorme cantidad de contenido textual, resulta totalmente intratable procesar o digerir la información de las opiniones de forma manual, lo que hace imperativa la automatización \parencite{ZhangEtAl2022}.
+
+En la literatura técnica, los textos de opinión que sirven como fuente de datos suelen dividirse en dos grandes categorías \parencite{KimEtAl2010}. Por un lado, las opiniones de expertos son artículos, como las reseñas editoriales, que suelen estar bien estructurados y en los que es fácil identificar las características de un producto, aunque tienen la desventaja de que no se actualizan con la frecuencia necesaria para reflejar cambios o noticias recientes \parencite{KimEtAl2010}. Por otro lado, las opiniones ordinarias están conformadas principalmente por reseñas directas de usuarios y comentarios en blogs, que se actualizan constantemente y reflejan las tendencias actuales, pero presentan altos niveles de ruido, ya que se redactan en formatos no estructurados y suelen contener errores gramaticales, argot (\emph{slang}), emoticonos, errores tipográficos y enlaces irrelevantes, lo que dificulta enormemente su análisis informático automático \parencite{AliEtAl2016, KimEtAl2010}.
+
+Para lograr que estas reseñas sean verdaderamente útiles como fuente de datos, es necesario diseñar marcos computacionales automáticos que analicen y extraigan las opiniones ocultas detrás de estos textos no estructurados \parencite{ZhangEtAl2022}. Esta necesidad ha impulsado el surgimiento y consolidación de campos de investigación como la minería de opiniones (\emph{opinion mining}), el análisis de sentimientos y la sumarización de opiniones \parencite{ZhangEtAl2022}. Estas disciplinas buscan extraer información valiosa de los comentarios de los usuarios utilizando métodos avanzados de procesamiento de lenguaje natural (PLN), automatizando la clasificación de las reseñas y filtrando el ruido para generar resúmenes digeribles \parencite{AliEtAl2016, KimEtAl2010}.
+
+\subsection{Análisis de Sentimiento Basado en Aspectos (ABSA)}\label{subsec:absa}
+
+El Análisis de Sentimientos Basado en Aspectos surge como una evolución necesaria frente a las limitaciones del análisis de sentimientos tradicional. Los enfoques convencionales suelen realizar predicciones a nivel de oración o documento, asumiendo que el texto transmite un único sentimiento general sobre un tema determinado \parencite{ZhangEtAl2022}. Sin embargo, en escenarios reales, los usuarios suelen evaluar múltiples características de un producto o servicio de manera simultánea y con polaridades mixtas. Frente a esto, el ABSA desplaza el objetivo del análisis desde la totalidad del documento hacia una entidad específica o un \enquote{aspecto} de dicha entidad, lo que permite reconocer opiniones y sentimientos de una forma mucho más granular \parencite{ZhangEtAl2022}. En última instancia, el objetivo del ABSA es construir un resumen exhaustivo de opiniones a nivel de aspecto para facilitar la toma de decisiones \parencite{ZhangEtAl2022}.
+
+Toda la investigación sobre ABSA se estructura en torno a la identificación y relación de cuatro elementos clave del sentimiento \parencite{ZhangEtAl2022}. El término de aspecto (\emph{aspect term}, $a$) es el objetivo explícito de la opinión tal como aparece en el texto (por ejemplo, \enquote{pizza}); la categoría de aspecto (\emph{aspect category}, $c$) representa una categoría predefinida dentro de un dominio específico a la que pertenece ese término (por ejemplo, \enquote{comida}); el término de opinión (\emph{opinion term}, $o$) es la expresión concreta que utiliza el usuario para manifestar su sentimiento hacia el objetivo (por ejemplo, \enquote{deliciosa}); y la polaridad de sentimiento (\emph{sentiment polarity}, $p$) describe la orientación general del sentimiento, clasificándose habitualmente en positivo, negativo o neutral \parencite{ZhangEtAl2022}.
+
+El paso final es agregar estas opiniones en un resumen, lo que se desarrolla a continuación.
+
+\subsection{Resumen y agregación de opiniones}\label{subsec:resumen_opiniones}
+
+El resumen y agregación de opiniones (\emph{Opinion Summarization}) tiene como objetivo principal generar una síntesis concisa y digerible a partir de una gran cantidad de textos de opinión, ayudando a procesar información que de otro modo sería abrumadora y proporcionando información granular útil para la toma de decisiones \parencite{KimEtAl2010, ZhangEtAl2022}.
+
+El enfoque más relevante para el presente trabajo es el resumen basado en aspectos (\emph{Aspect-based Summarization}), que estructura y agrega las opiniones en torno a características o aspectos específicos de un producto. Tras extraer los aspectos y predecir su polaridad de sentimiento, la agregación puede presentarse al usuario de las siguientes formas \parencite{KimEtAl2010}:
+
+El resumen estadístico es el formato más comúnmente adoptado: agrega y muestra la cantidad de opiniones positivas y negativas para cada aspecto, a menudo visualizadas mediante gráficos o tablas para una comprensión más intuitiva e inmediata. La selección de texto, dado que los resúmenes estadísticos puros pueden carecer de contexto, agrega fragmentos de texto representativos para que el usuario pueda leer las justificaciones reales detrás de la estadística. Las calificaciones agregadas combinan ambos formatos anteriores, promediando las predicciones de sentimiento de cada aspecto para ofrecer una calificación final unificada, acompañada de las frases más representativas. Por último, el resumen con línea de tiempo muestra la tendencia y evolución de las opiniones a lo largo del tiempo, útil para identificar cómo reacciona el público frente a eventos o actualizaciones específicas \parencite{KimEtAl2010}.
+
+Existen además enfoques no basados en aspectos, que generan resúmenes más generales sin descomponer el texto por características, como el conteo global de polaridad, el resumen de opiniones contrastantes o el resumen abstractivo, pero resultan menos pertinentes para un panel orientado a desarrolladores, donde el valor está en la opinión desagregada por aspecto \parencite{KimEtAl2010}.
+
+\section{Sistemas de Recomendación en Videojuegos}\label{sec:recomendacion_videojuegos}
+
+\subsection{Particularidades del Dominio de los Videojuegos}\label{subsec:particularidades_videojuegos}
+
+Los videojuegos representan un dominio particular para los sistemas de recomendación debido a la diversidad de preferencias, opciones y necesidades específicas de los jugadores \parencite{CheuqueEtAl2019, ViljanenEtAl2020}. El ámbito de los videojuegos facilita la generación de datos de interacción tanto sobre los jugadores como sobre los títulos. Estos datos pueden ser explícitos (como un juego favorito mencionado en una encuesta) o implícitos (como juegos comprados o tiempo de juego) \parencite{ViljanenEtAl2020, CheuqueEtAl2019}. A diferencia de otros productos, los videojuegos ofrecen una enorme cantidad de información adicional que puede convertirse en una posible característica a analizar para los modelos de recomendación. Ya sea sobre los juegos en sí, como género, reseñas o descripciones textuales, o sobre los jugadores, como sus hábitos, perfiles y motivaciones a la hora de elegir qué jugar \parencite{ViljanenEtAl2020}.
+
+Los sistemas de recomendación y perfilado permiten clasificar a los usuarios según sus preferencias y categorías muy específicas, como motivaciones, estilos de juego, mentalidades (por ejemplo, casual o competitivo) o tipos de jugabilidad \parencite{ViljanenEtAl2020}. Además, la gran cantidad de videojuegos disponibles dificulta la toma de decisiones debido a la magnitud y complejidad de los catálogos actuales, lo que genera un problema práctico tanto para los jugadores como para las plataformas \parencite{LeeJung2019, CheuqueEtAl2019}. Las elecciones no dependen únicamente del género, sino de una combinación importante de estilos y preferencias de jugabilidad. Es por esto que un sistema que filtre esta información evita que el usuario se enfrente a una enorme sobrecarga de opciones que no necesariamente se alinean con sus gustos personales \parencite{CheuqueEtAl2019}.
+
+Teniendo en cuenta la magnitud de los catálogos actuales, compuestos por miles de títulos, se vuelve prácticamente inviable gestionar manualmente las infinitas interacciones entre jugadores y videojuegos sin la ayuda de sistemas automatizados \parencite{LeeJung2019, CheuqueEtAl2019}. Ante la gran cantidad de opciones disponibles, las plataformas dependen directamente de estos sistemas no solo para satisfacer a sus usuarios, sino también para aumentar las ventas, ya que una recomendación precisa ayuda al jugador a navegar por el catálogo frente a una oferta cada vez más amplia \parencite{ViljanenEtAl2020, CheuqueEtAl2019}.
+
+\subsection{Información Utilizada para Recomendar Videojuegos}\label{subsec:informacion_recomendacion}
+
+Los sistemas de recomendación de videojuegos utilizan diversos tipos de información, que pueden clasificarse principalmente en datos de interacción y características de contenido \parencite{ViljanenEtAl2020, CheuqueEtAl2019}. Los datos de interacción registran la relación histórica entre los jugadores y los títulos, y constituyen la base de los modelos de filtrado colaborativo. Se obtienen a partir de señales implícitas, derivadas del comportamiento del usuario, como qué juegos posee, el tiempo dedicado a cada uno o su historial de compras, y de señales explícitas, que el jugador proporciona de forma directa, como calificaciones, reseñas o preferencias declaradas en encuestas \parencite{CheuqueEtAl2019, ViljanenEtAl2020}.
+
+Por su parte, las características de contenido se extraen de los propios videojuegos para identificar similitudes entre ellos en los modelos basados en contenido. Suelen estar basadas en etiquetas y géneros, que describen aspectos temáticos como \enquote{puzles} o \enquote{estrategia}, así como en información textual, incluyendo reseñas y descripciones \parencite{LeeJung2019, ViljanenEtAl2020}. En particular, las reseñas pueden procesarse mediante técnicas de procesamiento de lenguaje natural para transformar su contenido textual en representaciones numéricas utilizables por los algoritmos, y señales como el tiempo de juego ayudan a estimar qué tan relevante resulta un título para un perfil determinado \parencite{CheuqueEtAl2019}.
+
+Al combinar los datos de interacción con las características de contenido, los sistemas construyen representaciones más completas tanto de los usuarios como de los títulos, lo que permite generar perfiles de jugador más precisos y predecir el interés de un usuario incluso sobre juegos que nunca ha probado \parencite{DeSimoneEtAl2021, ViljanenEtAl2020}. A partir de esa estimación de afinidad, el sistema genera listas de recomendación personalizadas y facilita el descubrimiento de títulos que el usuario podría no conocer, evitando limitar las sugerencias únicamente a los más populares \parencite{CheuqueEtAl2019}.
+
+\subsection{Desafíos de la Recomendación de Videojuegos}\label{subsec:desafios_recomendacion}
+
+La dificultad de recomendar videojuegos de manera precisa radica en una combinación de factores estructurales de la industria, el comportamiento inconsistente de los usuarios y las limitaciones de los datos disponibles. Principalmente, la industria ha experimentado una diversificación masiva, acompañada por un aumento significativo tanto en la cantidad de jugadores como en los tipos de videojuegos disponibles \parencite{CheuqueEtAl2019, LeeJung2019}. Esta enorme variedad de géneros, categorías y plataformas hace que sea extremadamente difícil para un sistema seleccionar un videojuego específico para un usuario con gustos particulares entre miles de opciones posibles.
+
+Los datos disponibles en las plataformas suelen ser altamente dispersos, ya que normalmente existe un catálogo enorme de videojuegos, pero con relativamente pocas interacciones registradas para la mayoría de ellos. Esto provoca que un pequeño número de títulos concentre gran parte de las interacciones de los usuarios. Como consecuencia, se dificulta la recomendación de videojuegos menos conocidos o pertenecientes a géneros más específicos, sin caer en la tendencia de recomendar únicamente títulos populares o similares a aquellos con mayor cantidad de interacciones \parencite{CheuqueEtAl2019, ViljanenEtAl2020}.
+
+Además, jugar videojuegos suele ser una actividad recurrente, donde la mayoría de los usuarios disfruta de sus títulos favoritos en múltiples ocasiones, pero al mismo tiempo desea descubrir nuevas experiencias. Este fenómeno es conocido como el \enquote{doble reto}, donde el algoritmo debe ser capaz de identificar qué videojuegos fomentarán la permanencia del usuario dentro de la plataforma y, simultáneamente, cuáles son los títulos novedosos que podría llegar a consumir con el mismo interés que sus juegos favoritos actuales \parencite{CheuqueEtAl2019}.
+
+El valor del descubrimiento no es un aspecto que pueda ser ignorado. En una industria tan amplia y diversificada, un sistema que únicamente sea preciso con lo ya conocido o popular fallaría en promover la exploración de nuevas alternativas. Por este motivo, encontrar un equilibrio entre precisión y diversidad se convierte en un requisito fundamental dentro de los sistemas de recomendación de videojuegos. La diversidad en las recomendaciones resulta crítica para ayudar a los usuarios a navegar dentro de la sobrecarga de títulos disponibles y descubrir videojuegos que, aunque no sean los más populares, logren ajustarse de manera adecuada a sus gustos e intereses particulares \parencite{CheuqueEtAl2019}.
+
+\section{Analítica de Audiencias para Desarrolladores}\label{sec:analitica_audiencias}
+
+\subsection{La necesidad de analítica}\label{subsec:necesidad_analitica}
+
+El diseño de videojuegos tiene como meta principal crear una excelente experiencia para el jugador, mientras que las empresas buscan fundamentalmente generar ingresos \parencite{DrachenEtAl2011}. La analítica es sumamente necesaria para poder alinear estos dos objetivos, especialmente en los modelos de negocio gratuitos (\emph{Free-to-Play}), asegurando la retención de los clientes y monitoreando que el ciclo de monetización funcione sin estropear la experiencia de juego \parencite{DrachenEtAl2011}.
+
+Existe una enorme necesidad de evaluar de forma empírica y a través de telemetría cómo interactúan las personas con el juego y cuál es la calidad de esa interacción \parencite{DrachenEtAl2011}. Las métricas de jugabilidad en los sistemas de análisis informan el diseño al revelar si los jugadores navegan y usan las mecánicas según lo planeado, o si se topan con barreras que obstaculizan su progresión o disfrute \parencite{DrachenEtAl2011}.
+
+Con la evolución de la industria y la venta de bienes virtuales, ha crecido significativamente la necesidad de distinguir los distintos tipos de jugadores y estilos de juego que conviven en un mismo producto \parencite{TuunanenHamari2012}. Aplicar la analítica de comportamiento permite segmentar de forma precisa a la base de usuarios; de esta manera, los desarrolladores pueden orientar sus estrategias de marketing, publicidad y las ofertas de los productos virtuales para que coincidan de la forma más exacta posible con los intereses de cada segmento \parencite{TuunanenHamari2012}.
+
+Durante el desarrollo y el lanzamiento de un título se genera gran incertidumbre respecto a las reacciones emocionales de la audiencia \parencite{GuzsvineczSzucs2023}. La analítica basada en minería de textos y análisis de sentimientos sobre los comentarios de plataformas (como Steam) se hace indispensable, ya que proporciona una retroalimentación crítica a los desarrolladores al revelar de qué se quejan los jugadores (ya sean decisiones de diseño de juego o bugs), cuáles son sus preocupaciones y qué los influye para recomendar o no un título \parencite{GuzsvineczSzucs2023}.
+
+\subsection{Segmentación y caracterización de la audiencia}\label{subsec:segmentacion_audiencia}
+
+Es una división muy común en la industria. Los jugadores \emph{hardcore} (núcleo duro) se caracterizan por una mayor dedicación, sesiones de juego más largas y frecuentes, participación en foros, y una búsqueda constante de retos intelectuales o experiencias inmersivas profundas \parencite{TuunanenHamari2012}. Por el contrario, los jugadores casuales tienen mentalidades orientadas a matar el tiempo, llenar huecos en su rutina o simplemente relajarse \parencite{TuunanenHamari2012}. Sin embargo, los investigadores señalan que esta segmentación no debería ser una dicotomía estricta, sino más bien una escala continua de intensidad y compromiso \parencite{TuunanenHamari2012}.
+
+La audiencia se categoriza frecuentemente según sus motivaciones y la forma en que interactúan con el mundo del juego y con otras personas. Las tipologías más destacadas dividen a los jugadores en:
+
+Los triunfadores (\emph{achievers}), orientados al logro, son jugadores enfocados en el mundo del juego que buscan conseguir metas, subir de nivel, obtener poder y \enquote{vencer} al juego. Los exploradores (\emph{explorers}) están motivados por el descubrimiento del mundo virtual, la fantasía, la historia y el escapismo. Los socializadores (\emph{socialisers}), orientados a la comunidad, tienen como principal motivación interactuar con otros, construir relaciones, colaborar y ayudar. Por último, los asesinos (\emph{killers}), o jugadores agresivos, se orientan a la acción directa contra otros jugadores, buscando el dominio, la provocación y, en ocasiones, un comportamiento antisocial o de \enquote{lobo solitario} \parencite{TuunanenHamari2012}.
+
+Para caracterizar con precisión a la audiencia, las empresas recolectan terabytes de datos (telemetría) que les permiten perfilar a los jugadores \parencite{DrachenEtAl2011}. Las métricas enfocadas en el usuario se dividen en tres áreas fundamentales para entender a la audiencia:
+
+Las métricas de cliente miden el comportamiento de gasto, la retención y la adquisición. Las métricas de comunidad analizan las interacciones entre los usuarios (chats, foros, redes), lo que permite descubrir, por ejemplo, jugadores con fuertes redes sociales que actúan como anclas para retener a otros en el juego. Por último, las métricas de jugabilidad (\emph{gameplay}) rastrean el comportamiento exacto dentro del mundo virtual (navegación, uso de objetos, economía) para evaluar si la experiencia de usuario y el diseño están funcionando como se preveía \parencite{DrachenEtAl2011}.
+
+\subsection{Análisis de la recepción de un juego}\label{subsec:analisis_recepcion}
+
+La forma más directa en que los jugadores comparten su experiencia es escribiendo reseñas \parencite{GuzsvineczSzucs2023}. Utilizando métodos de procesamiento de lenguaje natural (NLP), los investigadores y desarrolladores pueden extraer la valencia emocional (positiva o negativa) y detectar emociones básicas como alegría, confianza, ira, miedo o tristeza en los textos \parencite{GuzsvineczSzucs2023}. Se ha observado que, al redactar una reseña, la valencia emocional de los jugadores tiende a disminuir a medida que avanza el texto; es decir, comienzan con un tono más positivo que se va volviendo más crítico hacia el final, especialmente en las reseñas negativas \parencite{GuzsvineczSzucs2023}.
+
+Existe una correlación clara entre el tipo de experiencia del jugador y la longitud de su reseña. Las reseñas negativas son significativamente más largas que las positivas en casi todos los géneros de videojuegos \parencite{GuzsvineczSzucs2023}. En promedio, la longitud mediana de una reseña negativa es de 40 palabras, mientras que la de una positiva es de apenas 19 palabras \parencite{GuzsvineczSzucs2023}. Esto implica que los jugadores insatisfechos invierten más esfuerzo en detallar qué aspectos del juego o del diseño fallaron.
+
+El análisis de la recepción demuestra que las primeras horas de un juego son las más críticas \parencite{GuzsvineczSzucs2023}. Los jugadores que tienen una experiencia negativa deciden escribir su crítica de forma mucho más temprana (con una mediana de aproximadamente 2 horas de juego) en comparación con aquellos que escriben reseñas positivas (quienes promedian cerca de 6,7 horas antes de opinar) \parencite{GuzsvineczSzucs2023}. Esto subraya la importancia de diseñar las horas iniciales de un juego para que sean lo más cautivadoras posible.
+
+La recepción no solo se mide en tiendas como Steam, sino también a través de \enquote{métricas de comunidad} \parencite{DrachenEtAl2011}. Los jugadores interactúan en chats dentro del juego, en foros oficiales o en redes sociales. El análisis de estas interacciones (por ejemplo, mediante minería de registros de chat o foros) revela de qué se queja la comunidad, descubre problemas de diseño que quizás no se detectaron en las pruebas y ayuda a identificar a aquellos jugadores clave que mantienen unida y activa a la base de usuarios \parencite{DrachenEtAl2011}.
+
+\subsection{De los datos a la decisión}\label{subsec:datos_decision}
+
+El proceso de pasar \enquote{de los datos a la decisión} es el núcleo de la analítica de videojuegos: consiste en transformar los datos en bruto en inteligencia de negocios (\emph{Business Intelligence}) útil, de modo que las decisiones de desarrollo y las estrategias de la empresa estén impulsadas por datos (\emph{data-driven}) en lugar de por suposiciones \parencite{DrachenEtAl2011}. Para ello se sigue un proceso de descubrimiento de conocimiento, un ciclo que va desde la definición de objetivos y la adquisición y preprocesamiento de los datos, pasando por el desarrollo de métricas y el análisis, hasta la visualización y los informes que se presentan a los tomadores de decisiones; el despliegue de cada decisión suele iniciar un nuevo ciclo para medir su impacto \parencite{DrachenEtAl2011}.
+
+Según el alcance y el horizonte temporal del problema, la toma de decisiones basada en datos se divide en tres enfoques: la analítica estratégica, orientada a la evolución del juego a largo plazo combinando el comportamiento del usuario con el modelo de negocio; la analítica táctica, de corto plazo, que informa decisiones de diseño inmediatas; y la analítica operacional, que evalúa la situación en tiempo real para realizar ajustes inmediatos \parencite{DrachenEtAl2011}. En conjunto, este enfoque permite a los desarrolladores predecir comportamientos, descubrir fallas y guiar el diseño futuro a partir de evidencia y no de suposiciones \parencite{DrachenEtAl2011}.
+
+\section{Fuentes de datos y conjuntos de datos utilizados}\label{sec:fuentes_datos}
+
+El sistema requiere tres tipos de datos para operar: metadatos que caractericen a cada videojuego, reseñas de usuarios sobre las que aplicar el análisis de opiniones, e interacciones entre usuarios y títulos que sustenten el filtrado colaborativo. La presente sección identifica el origen de cada uno, justifica su elección y declara las limitaciones que de ella se derivan.
+
+Corresponde señalar una decisión metodológica previa. El trabajo no emplea conjuntos de datos preexistentes de los habitualmente utilizados en la investigación sobre sistemas de recomendación, sino que construye su propio conjunto a partir de interfaces públicas. La razón es que dichos conjuntos suelen contener interacciones históricas anonimizadas, pero carecen de las reseñas textuales asociadas a cada título, que constituyen el insumo central del módulo de análisis orientado a desarrolladores. Utilizarlos permitiría evaluar el filtrado colaborativo de manera aislada, pero no las dos capacidades del sistema sobre el mismo conjunto de títulos.
+
+\setlength{\tabcolsep}{4pt}
+\begin{longtable}{>{\raggedright\arraybackslash}p{2.3cm} >{\raggedright\arraybackslash}p{3.7cm} >{\raggedright\arraybackslash}p{3.2cm} >{\raggedright\arraybackslash}p{3.2cm}}
+	\caption{Fuentes de datos utilizadas por el sistema.}\label{tab:fuentes_datos} \\
+	\hline
+	\textbf{Fuente} & \textbf{Contenido} & \textbf{Volumen y cobertura} & \textbf{Uso en el sistema} \\
+	\hline
+	\endfirsthead
+	\multicolumn{4}{l}{\textit{Continuación de la Tabla \ref{tab:fuentes_datos}}} \\
+	\hline
+	\textbf{Fuente} & \textbf{Contenido} & \textbf{Volumen y cobertura} & \textbf{Uso en el sistema} \\
+	\hline
+	\endhead
+	\hline
+	\endfoot
+	\hline
+	\endlastfoot
+	Steam Web API (ficha de producto) &
+	Nombre, descripción, fecha de lanzamiento, desarrollador, editor, géneros, categorías de plataforma, puntaje Metacritic e imágenes de cada título. &
+	6.430 títulos incorporados al catálogo local. &
+	Caracterización de los títulos y filtros de modalidad del asistente. \\
+	Steam Web API (reseñas de usuarios) &
+	Texto de la reseña, indicador de recomendación, horas jugadas al momento de reseñar, cantidad de votos de utilidad e identificador del autor. &
+	Reseñas en idioma español, con un tope de 100 por título; más de 1.000 títulos cuentan con reseñas incorporadas. &
+	Análisis de sentimiento por aspectos y estimación de la duración típica de cada título. \\
+	SteamSpy (índice masivo y ficha por juego) &
+	Etiquetas asignadas por la comunidad con su cantidad de votos, cantidad estimada de propietarios y totales de valoraciones positivas y negativas. &
+	Índice completo relevado; 1.000 títulos enriquecidos con etiquetas votadas en la corrida inicial. &
+	Corpus del modelo de contenido, vocabulario del asistente y señal de popularidad. \\
+	Recursos léxicos propios (elaboración del equipo) &
+	Léxico de polaridad en español (184 términos), términos indicadores de los cuatro aspectos, negadores, intensificadores, atenuadores y marcadores contrastivos. &
+	Recurso estático, versionado junto con el código fuente. &
+	Módulo de análisis de sentimiento basado en aspectos. \\
+	Interacciones de usuarios (generadas en la plataforma) &
+	Calificaciones, horas registradas, estado de los títulos, reseñas propias y listas. &
+	Generadas dentro del propio sistema por los usuarios registrados. &
+	Filtrado colaborativo y construcción del perfil de usuario. \\
+\end{longtable}
+\setlength{\tabcolsep}{6pt}
+
+\subsection{Justificación de las fuentes seleccionadas}\label{subsec:justificacion_fuentes}
+
+La elección de Steam como fuente principal responde a tres motivos. En primer lugar, constituye la plataforma de referencia del dominio, según se analizó en el estado del arte, y su catálogo representa el caso paradigmático del problema de sobrecarga de información que motiva el trabajo. En segundo lugar, expone públicamente tanto los metadatos de los títulos como las reseñas de los usuarios, lo que permite obtener ambos insumos de un mismo origen y con identificadores consistentes. En tercer lugar, sus reseñas incorporan las horas jugadas al momento de reseñar, dato que el sistema aprovecha para estimar la duración típica de cada título.
+
+La incorporación de SteamSpy responde a una limitación detectada en los datos de la tienda: las categorías que Steam publica describen características de la plataforma, como la existencia de modo multijugador o el soporte de logros, pero no caracterizan la jugabilidad. Las etiquetas asignadas por la comunidad, en cambio, expresan cómo los propios jugadores describen cada título, e incorporan la cantidad de votos que recibió cada etiqueta, lo que permite ponderar su relevancia en lugar de tratarlas como atributos binarios.
+
+Los recursos léxicos fueron elaborados por el equipo en lugar de adoptarse de un servicio externo de análisis de sentimiento. Esta decisión se fundamenta en que el módulo de análisis constituye la capacidad más diferencial de la propuesta, según se estableció en el análisis competitivo, y delegarla en un servicio de terceros habría trasladado fuera del sistema aquello que se propone aportar. Adicionalmente, permite operar sobre texto en español sin costos asociados por volumen de procesamiento.
+
+\subsection{Limitaciones de los datos utilizados}\label{subsec:limitaciones_datos}
+
+Se declaran las siguientes limitaciones, que condicionan el alcance de los resultados obtenidos:
+
+\begin{itemize}
+	\item \textbf{Sesgo de idioma.} Las reseñas incorporadas se restringen al español, dado que el módulo de análisis opera sobre ese idioma. Ello reduce el volumen disponible por título respecto del total de reseñas existentes y puede introducir un sesgo regional en la recepción observada.
+	\item \textbf{Muestra acotada de reseñas.} La incorporación se encuentra limitada a cien reseñas por título, con el fin de acotar el volumen de solicitudes a la interfaz externa. En consecuencia, los agregados obtenidos constituyen una muestra y no la totalidad de las opiniones publicadas.
+	\item \textbf{Sesgo del reseñador.} Quienes escriben reseñas no constituyen una muestra representativa del conjunto de jugadores, y tienden a acumular más horas de juego que el promedio. Esta limitación afecta especialmente a la estimación de duración, motivo por el cual dicha estimación se utiliza para clasificar los títulos en franjas amplias y no como un valor puntual.
+	\item \textbf{Ausencia de un conjunto externo de interacciones.} El filtrado colaborativo opera sobre las interacciones generadas dentro de la propia plataforma, cuyo volumen es reducido por tratarse de un prototipo académico sin base de usuarios real. Esta limitación fue identificada en el análisis FODA y se aborda mediante el mecanismo de respaldo basado en popularidad.
+	\item \textbf{Dependencia de terceros.} La totalidad del catálogo proviene de fuentes externas sobre las que el proyecto no ejerce control. Durante el desarrollo, una de las fuentes inicialmente previstas dejó de encontrarse disponible, contingencia que motivó el requerimiento no funcional RNF-03 (véase la sección~\ref{sec:rnf}).
+\end{itemize}
+
+En cuanto a las condiciones de uso, la información se obtiene de interfaces de acceso público mediante solicitudes que respetan las limitaciones de frecuencia establecidas por cada proveedor. Los datos se utilizan con fines exclusivamente académicos, se almacenan localmente para el funcionamiento del prototipo y no se redistribuyen, lo que resulta consistente con el alcance definido en la sección~\ref{sec:alcance}, que excluye el despliegue comercial.
